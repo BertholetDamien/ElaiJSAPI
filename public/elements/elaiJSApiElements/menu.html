@@ -1,0 +1,45 @@
+<dom-module id="elaijsapi-menu">
+  <style include="icons-styles"></style>
+  <style>
+    :host {
+      width: 100%;
+    }
+    
+    :host > div {
+      border-top: 1px solid white;
+    }
+    
+    :host > div:first-child {
+      border-top: 0;
+    }
+    
+  </style>
+
+  <template>
+    <div>
+      <elaijsapi-submenu pagename="home"></elaijsapi-submenu>
+    </div>
+    <div>
+    <elaijsapi-submenu pagename="documentation" submenus$="[[docMenus]]"></elaijsapi-submenu>
+    </div>
+    <div>
+    <elaijsapi-submenu pagename="download"></elaijsapi-submenu>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-menu',
+      TAG: "menu",
+      behaviors: [ElaiJSBehaviors.Basic,
+                  ElaiJSBehaviors.Navigator],
+      properties: {
+      },
+      ready: function() {
+        this.docMenus = ["general", "navigator", "language", "widget", "plugin"];
+      }
+    });
+    });
+  </script>
+</dom-module>

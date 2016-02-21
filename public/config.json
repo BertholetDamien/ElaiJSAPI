@@ -1,0 +1,20 @@
+{
+  "defaultPlugins": {
+    "elaiJS/polymerend": {}
+  },
+  "homePage": "home",
+  "loadThemeAsPolymerMixin": true,
+  "languages": [
+      {"code": "fr", "label": "Français"},
+      {"code": "en", "label": "English"}
+  ],
+  "ressources": {
+    "WebComponent": "widget-{{name}}",
+    "WebComponentMode": "widget-{{name}}-{{mode}}",
+    "theme": "{{ressources}}/themes/{{name}}.json"
+  },
+  "pagesAvailable": ["home", "documentation", "download"],
+  "page404": "404",
+  "setDefaultNavigationFunctions" : true,
+  "skipLocalisationInitialization": true
+}

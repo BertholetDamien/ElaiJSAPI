@@ -1,0 +1,142 @@
+<dom-module id="elaijsapi-submenu">
+  <style include="icons-styles"></style>
+  <style>
+    :host {
+      --selected-menu-color: #9FA8DA;
+      --hover-menu-color: #757575;
+
+      --padding-link: 0.5em;
+    }
+    
+    :host a {
+      font-size: 1.3em;
+      color: var(--light-white-color);
+      text-decoration: none;
+      
+      padding: 0.1em var(--padding-link);
+      width: calc(100% - var(--padding-link)*2) !important;
+      
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+    }
+    
+    .subMenu > .link a {
+      padding: 0.3em var(--padding-link);
+    }
+    
+    .icon {
+      padding-left: calc(var(--padding-link) + 30px) !important;
+      width: calc(100% - var(--padding-link)*2 - 30px) !important;
+      background-position: var(--padding-link) center;
+    }
+    
+    .link {
+      cursor: pointer;
+      transition: background-color,color 300ms;
+    }
+    
+    .link:hover {
+      background-color: var(--hover-menu-color);
+    }
+    
+    .link:hover > a {
+      color: white;
+    }
+    
+    .link.active > a {
+      color: var(--selected-menu-color);
+    }
+    
+    .subItems {
+      margin-left: 0.8em;
+    }
+  </style>
+
+  <template>
+    <div class="subMenu">
+      <template is="dom-if" if="[[hasSubMenus]]">
+        <div class="link" on-click=toggleSubMenus>
+          <a class$="icon icon24 [[pagename]]">{{get(lang, pagename)}}</a>
+        </div>
+        <iron-collapse class="subItems iron-collapse-closed">
+          <div class="content">
+            <template is="dom-repeat" items="[[submenus]]">
+              <div data-name$=[[item]] class="link">
+                <a href="[[buildSubMenuHash(item)]]">{{get(lang, item)}}</a>
+              </div>
+            </template>
+          </div>
+        </iron-collapse>
+      </template>
+
+      <template is="dom-if" if="[[!hasSubMenus]]">
+        <div class="subMenu">
+          <div class="link">
+            <a href$="[[buildHash(pagename)]]" class$="icon icon24 [[pagename]]">{{get(lang, pagename)}}</a>
+          </div>
+        </div>
+      </template>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-submenu',
+      behaviors: [ElaiJSBehaviors.Basic,
+                  ElaiJSBehaviors.Navigator
+      ],
+      properties: {
+        submenus: Object,
+        pagename: String,
+        pageInfo: {
+          type: Object,
+          observer: "refreshActiveMenu"
+        }
+      },
+      attached: function() {
+        this.hasSubMenus = (this.submenus !== undefined);
+        var _this = this;
+        setTimeout(function() {
+          _this.refreshActiveMenu();
+        });
+      },
+      toggleSubMenus: function() {
+        this.querySelector(".subItems").toggle();
+      },
+      showSubMenus: function(timer) {
+        var _this = this;
+        setTimeout(function() {
+          _this.querySelector(".subItems").show();
+        }, timer);
+      },
+      buildSubMenuHash: function(name) {
+        return this.buildHash({page: this.pagename, name: name});
+      },
+      refreshActiveMenu: function() {
+        var elemLink = this.querySelector(".subMenu > .link");
+        var isPage = this.pageInfo.page === this.pagename;
+        
+        if(this.hasSubMenus) {
+          toggleActive(this.querySelector(".subItems .active"), false);
+          toggleActive(this.getSubLink(this.pageInfo.name), true);
+          if(isPage)
+            this.showSubMenus(500);
+        }
+        
+        toggleActive(elemLink, isPage);
+        
+        function toggleActive(elem, isActive) {
+          if(elem && isActive)
+            elem.classList.add("active");
+          else if(elem)
+            elem.classList.remove("active");
+        }
+      },
+      getSubLink: function(name) {
+        return this.querySelector(".link[data-name=" + name + "]");
+      }
+    });
+    });
+  </script>
+</dom-module>

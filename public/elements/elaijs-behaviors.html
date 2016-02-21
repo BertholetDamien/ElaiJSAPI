@@ -1,0 +1,101 @@
+<script>
+(function() {
+  var waitings = [];
+  window.ElaiJSBehaviors = window.ElaiJSBehaviors || {};
+  
+  window.ElaiJSBehaviors.wait = function(callback) {
+    if(waitings === undefined)
+      callback();
+    else
+      waitings.push(callback);
+  };
+  
+  function loaded() {
+    for(var i in waitings)
+      waitings[i]();
+    waitings = undefined;
+  }
+  
+  function addEventToElem(obj, eventName, fct) {
+    obj.bind(eventName, fct, undefined, this);
+    
+    function unbindEvents(e) {
+      obj.unbind(eventName, fct);
+      e.detail.removeEventListener("detached", unbindEvents);
+    }
+    
+    this.addEventListener("detached", unbindEvents);
+  }
+  
+  require([ "elaiJS/language", "elaiJS/helper", "elaiJS/configuration",
+            "elaiJS/navigator"],
+            function(lang, helper, config, navigator) {
+    
+    ElaiJSBehaviors.Basic = {
+      properties: {
+        lang: Object
+      },
+      ready: function() {
+        this.lang = lang;
+        this.selectLanguage = lang.getLanguage();
+        this.helper = helper;
+        this.config = config;
+      },
+      attached: function() {
+        this.fire('attached');
+        addEventToElem.call(this, lang, lang.EVENT.languageChanged, languageChanged);
+        
+        function languageChanged() {
+          this.lang = undefined;
+          this.lang = lang;
+          this.selectLanguage = lang.getLanguage();
+        };
+      },
+      detached: function() {
+        this.fire('detached', this);
+      },
+      get: function(obj, key, params, language) {
+        if(!obj || key === undefined)
+          return "";
+        
+        if(this.TAG)
+          key = this.TAG + "_" + key;
+        return obj.get(key, params, language);
+      },
+      buildHash: function(params) {
+        if(!helper.isObject(params))
+          params = {page: params};
+        
+        return config.buildHash(params);
+      },
+      getVersionURL: function(url) {
+        if(!config.version)
+          return url;
+        
+        return url + "?v=" + config.version;
+    	}
+    };
+    
+    ElaiJSBehaviors.Navigator = {
+      properties: {
+        pageInfo: {
+          type: Object
+        }
+      },
+      ready: function() {
+        var event = navigator.EVENT.pageChanged;
+        addEventToElem.call(this, navigator, event, updatePageInfo);
+        
+        updatePageInfo.call(this, true);
+        
+        function updatePageInfo(init) {
+          var pageInfo = navigator.getCurrentPageInfo();
+          this.pageInfo = pageInfo;
+        }
+      }
+    };
+    
+    loaded();
+  });
+}());
+</script>

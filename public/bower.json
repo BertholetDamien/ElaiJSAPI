@@ -1,0 +1,27 @@
+{
+  "name": "public",
+  "authors": [
+    "Bertholet Damien <bertholet.damien@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.2.3",
+    "iron-collapse": "PolymerElements/iron-collapse#^1.0.6"
+  }
+}

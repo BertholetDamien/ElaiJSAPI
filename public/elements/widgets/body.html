@@ -1,0 +1,125 @@
+<dom-module id="widget-body">
+  <style>
+    :host {
+      --footer-color: #EEEEEE;
+      --logo-height: 100px;
+      --border-size: 4px;
+      --navigationArea-width: 300px;
+    }
+    
+    #navigationArea {
+      width: var(--navigationArea-width);
+    }
+    
+    #pageBody {
+      padding-left: var(--navigationArea-width);
+      display: inline-block;
+      background-color: white;
+      
+      width: calc(100% - var(--navigationArea-width));
+    }
+    
+    #pageTitle {
+      font-size: 2em;
+      
+      background-color: var(--dark-black-color);
+      color: var(--light-white-color);
+      padding-left: 1em;
+      border-bottom: var(--border-size) solid var(--very-dark-black-color);
+      
+      width: calc(100% - var(--navigationArea-width) - 1em);
+      position: fixed;
+    }
+    
+    #pageTitle > div {
+      height: var(--logo-height);
+    }
+    
+    #page {
+      margin-top: calc(var(--logo-height) + var(--border-size));
+      padding: 0.5em 3em;
+      text-align: justify;
+    }
+    
+    #footer {
+      font-size: 0.8em;
+      background-color: var(--footer-color);
+      color: var(--very-dark-black-color);
+    }
+    
+    #footer > div {
+      height: 3em;
+    }
+    
+    #copyright  a {
+      text-decoration: none;
+      color: var(--very-dark-black-color);
+      font-weight: bold;
+      font-style: italic;
+    }
+    
+    #copyright a:hover {
+      text-decoration: underline;
+    }
+  </style>
+    
+  <template>
+    <div id="navigationArea"></div>
+    <div id="pageBody">
+      <div id="pageTitle">
+        <div class="layout horizontal center">
+          {{getPageName(lang, pageInfo)}}
+        </div>
+      </div>
+      <div id="page"></div>
+      <div id="footer" class="layout vertical center">
+        <div class="layout horizontal center">
+          <p id="copyright">
+            <a>Test</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'widget-body',
+      behaviors: [ElaiJSBehaviors.Basic,
+                  ElaiJSBehaviors.Navigator
+      ],
+      properties: {
+        selectLanguage: {
+          type: Object,
+          observer: "refreshCopyright"
+        }
+      },
+      getPageName: function(lang, pageInfo) {
+        return lang.get(pageInfo.name || pageInfo.page);
+      },
+      refreshCopyright: function(lang) {
+        var params = {
+          year: 2016,
+          codeLicensed: createLinkHTML("https://opensource.org/licenses/MIT", "MIT License"),
+          documentationLicensed: createLinkHTML("http://creativecommons.org/licenses/by/3.0/", "CC BY 3.0")
+        };
+        
+        var html = this.lang.get("copyright", params);
+        this.$.copyright.innerHTML = html;
+        
+        function createLinkHTML(href, label) {
+          var htmlA = "<a ";
+          htmlA += 'href="' + href + '" ';
+          htmlA += 'target="_blank" ';
+          htmlA += 'class="widget-body">';
+          htmlA += label;
+          htmlA += '</a>';
+          
+          return htmlA;
+        }
+      }
+    });
+    });
+  </script>
+</dom-module>
