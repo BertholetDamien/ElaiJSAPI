@@ -13,7 +13,18 @@
     "WebComponentMode": "widget-{{name}}-{{mode}}",
     "theme": "{{ressources}}/themes/{{name}}.json"
   },
-  "pagesAvailable": ["home", "documentation", "download"],
+  "menu": [
+    {
+      "key": "home"
+    },
+    {
+      "key": "documentation",
+      "subMenus": ["general", "navigator", "language", "widget", "plugin"]
+    },
+    {
+      "key": "download"
+    }
+  ],
   "page404": "404",
   "setDefaultNavigationFunctions" : true,
   "skipLocalisationInitialization": true

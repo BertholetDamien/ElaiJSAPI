@@ -1,49 +1,62 @@
-<dom-module id="icons-styles">
-  <template>
-    <style>
-      .icon {
-        width: 18px;
-        height: 18px;
-        background-size: 18px;
-        display: inline-block;
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-      
-      .icon24 {
-        width: 24px;
-        height: 24px;
-        background-size: 24px;
-      }
-      
-      .icon36 {
-        width: 36px;
-        height: 36px;
-        background-size: 36px;
-      }
-      
-      .icon.documentation {
-        background-image: url("/images/icons/documentation_white_24dp.png");
-      }
-      
-      .icon.download {
-        background-image: url("/images/icons/download_white_24dp.png");
-      }
-      
-      .icon.home {
-        background-image: url("/images/icons/home_white_24dp.png");
-      }
-      
-      .icon.arrow_down.light_white {
-        background-image: url("/images/icons/arrow_down_light_white_36dp.png");
-      }
-      
-      .icon.arrow_down.hover_white:hover,
-      .icon.arrow_down.hover_white:focus {
-        background-image: url("/images/icons/arrow_down_white_36dp.png");
-      }
-      
-    </style>
-  </template>
-</dom-module>
+<style>
+  .icon {
+    display: inline-block;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .icon.action {
+    cursor: pointer;
+    transition: opacity 300ms;
+  }
+  
+  .icon.action:hover {
+    opacity: 0.7;
+  }
+  
+  .icon.icon18,
+  .icon.18 {
+    width: 18px;
+    height: 18px;
+    background-size: 18px;
+  }
+  
+  .icon.icon24 {
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+  }
+  
+  .icon.icon36 {
+    width: 36px;
+    height: 36px;
+    background-size: 36px;
+  }
+  
+  .icon.documentation {
+    background-image: url("/images/icons/documentation_white_24dp.png");
+  }
+  
+  .icon.download {
+    background-image: url("/images/icons/download_white_24dp.png");
+  }
+  
+  .icon.home {
+    background-image: url("/images/icons/home_white_24dp.png");
+  }
+  
+  .icon.arrow_down.light_white {
+    background-image: url("/images/icons/arrow_down_light_white_36dp.png");
+  }
+  
+  .icon.arrow_down.hover_white:hover,
+  .icon.arrow_down.hover_white:focus {
+    background-image: url("/images/icons/arrow_down_white_36dp.png");
+  }
+  
+  .icon.search.white.icon36 {
+    background-image: url("/images/icons/search_white_36dp.png");
+  }
+  
+</style>

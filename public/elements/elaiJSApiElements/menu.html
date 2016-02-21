@@ -1,5 +1,4 @@
 <dom-module id="elaijsapi-menu">
-  <style include="icons-styles"></style>
   <style>
     :host {
       width: 100%;
@@ -16,15 +15,11 @@
   </style>
 
   <template>
-    <div>
-      <elaijsapi-submenu pagename="home"></elaijsapi-submenu>
-    </div>
-    <div>
-    <elaijsapi-submenu pagename="documentation" submenus$="[[docMenus]]"></elaijsapi-submenu>
-    </div>
-    <div>
-    <elaijsapi-submenu pagename="download"></elaijsapi-submenu>
-    </div>
+    <template is="dom-repeat" items="[[config.menu]]">
+      <div>
+        <elaijsapi-submenu pagename="[[item.key]]" submenus$="[[item.subMenus]]"></elaijsapi-submenu>
+      </div>
+    </template>
   </template>
   
   <script>
@@ -32,12 +27,8 @@
     Polymer({
       is: 'elaijsapi-menu',
       TAG: "menu",
-      behaviors: [ElaiJSBehaviors.Basic,
-                  ElaiJSBehaviors.Navigator],
+      behaviors: [ElaiJSBehaviors.Basic],
       properties: {
-      },
-      ready: function() {
-        this.docMenus = ["general", "navigator", "language", "widget", "plugin"];
       }
     });
     });
