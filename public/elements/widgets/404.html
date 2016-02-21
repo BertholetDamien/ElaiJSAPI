@@ -1,0 +1,23 @@
+<dom-module id="widget-404">
+  <style>
+    :host {
+      font-size: 2em;
+    }
+  </style>
+
+  <template>
+    <p>
+      {{get(lang, 'full_description')}}
+    </p>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'widget-404',
+      TAG: "404",
+      behaviors: [ElaiJSBehaviors.Basic]
+    });
+    });
+  </script>
+</dom-module>

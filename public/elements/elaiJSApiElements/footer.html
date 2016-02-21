@@ -1,0 +1,75 @@
+<dom-module id="elaijsapi-footer">
+  <style>
+    :host {
+      --footer-background-color: #EEEEEE;
+    }
+    
+    #footer {
+      font-size: 0.8em;
+      background-color: var(--footer-background-color);
+      color: var(--very-dark-black-color);
+      margin: 1em 0;
+    }
+    
+    #footer > div {
+      height: 3em;
+    }
+    
+    #copyright  a {
+      text-decoration: none;
+      color: var(--very-dark-black-color);
+      font-weight: bold;
+      font-style: italic;
+    }
+    
+    #copyright a:hover {
+      text-decoration: underline;
+    }
+  </style>
+    
+  <template>
+    <div id="footer" class="layout vertical center">
+      <div class="layout horizontal center">
+        <p id="copyright">
+          <a>[[get(lang)]]</a>
+        </p>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-footer',
+      behaviors: [ElaiJSBehaviors.Basic],
+      properties: {
+        selectLanguage: {
+          type: Object,
+          observer: "refreshCopyright"
+        }
+      },
+      refreshCopyright: function() {
+        var params = {
+          year: 2016,
+          codeLicensed: createLinkHTML("https://opensource.org/licenses/MIT", "MIT License"),
+          documentationLicensed: createLinkHTML("http://creativecommons.org/licenses/by/3.0/", "CC BY 3.0")
+        };
+        
+        var html = this.lang.get("copyright", params);
+        this.$.copyright.innerHTML = html;
+        
+        function createLinkHTML(href, label) {
+          var htmlA = "<a ";
+          htmlA += 'href="' + href + '" ';
+          htmlA += 'target="_blank" ';
+          htmlA += 'class="elaijsapi-footer">';
+          htmlA += label;
+          htmlA += '</a>';
+          
+          return htmlA;
+        }
+      }
+    });
+    });
+  </script>
+</dom-module>
