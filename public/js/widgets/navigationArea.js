@@ -2,7 +2,7 @@ define(["elaiJS/language"], function(lang) {
   'use strict';
   
 	return function() {
-		this._initialize = function _initialize(callback) {
+		this._create = function _create(callback) {
 		  this.viewEvents = {"languageSelected": languageChanged};
 		  callback();
 		};
@@ -10,5 +10,12 @@ define(["elaiJS/language"], function(lang) {
 		function languageChanged(newValue) {
       lang.setLanguage(newValue);
 		}
+		
+		this.changeNavigationOpacity = function(value) {
+		  if(value)
+		    this.elementPolymer.classList.add("minOpacity");
+		  else
+		    this.elementPolymer.classList.remove("minOpacity");
+		};
   };
 });

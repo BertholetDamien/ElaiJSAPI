@@ -1,9 +1,37 @@
 <style>
-  .icon {
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/ressources/font/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url(/ressources/font/MaterialIcons-Regular.woff) format('woff');
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
     display: inline-block;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: center;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
   }
   
   .icon.action {
@@ -15,48 +43,12 @@
     opacity: 0.7;
   }
   
-  .icon.icon18,
-  .icon.18 {
-    width: 18px;
-    height: 18px;
-    background-size: 18px;
-  }
-  
-  .icon.icon24 {
-    width: 24px;
-    height: 24px;
-    background-size: 24px;
+  .icon.icon18 {
+    font-size: 18px;
   }
   
   .icon.icon36 {
-    width: 36px;
-    height: 36px;
-    background-size: 36px;
-  }
-  
-  .icon.documentation {
-    background-image: url("/images/icons/documentation_white_24dp.png");
-  }
-  
-  .icon.download {
-    background-image: url("/images/icons/download_white_24dp.png");
-  }
-  
-  .icon.home {
-    background-image: url("/images/icons/home_white_24dp.png");
-  }
-  
-  .icon.arrow_down.light_white {
-    background-image: url("/images/icons/arrow_down_light_white_36dp.png");
-  }
-  
-  .icon.arrow_down.hover_white:hover,
-  .icon.arrow_down.hover_white:focus {
-    background-image: url("/images/icons/arrow_down_white_36dp.png");
-  }
-  
-  .icon.search.white.icon36 {
-    background-image: url("/images/icons/search_white_36dp.png");
+    font-size: 36px;
   }
   
 </style>

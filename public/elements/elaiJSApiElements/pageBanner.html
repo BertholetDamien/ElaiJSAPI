@@ -1,8 +1,6 @@
 <dom-module id="elaijsapi-pageBanner">
   <style>
     #pageTitle {
-      font-size: 2em;
-      
       background-color: var(--dark-black-color);
       color: var(--light-white-color);
       padding: 0 1em;
@@ -10,6 +8,7 @@
       
       width: calc(100% - var(--navigationArea-width) - 2em);
       position: fixed;
+      overflow: auto;
     }
     
     #pageTitle > div {
@@ -17,25 +16,74 @@
       justify-content: space-between;
     }
     
+    #pageLabel {
+      font-size: 2em;
+    }
+    
+    #searchContainer {
+      margin-left: 0.2em;
+    }
+    
     #searchInputCollapse input {
       height: 30px;
       font-size: 20px;
+    }
+    
+    #menuButton {
+      display: none;
+      margin-right: 0.5em;
+    }
+    
+    .overlay {
+      background-color: var(--dark-black-color);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      
+      opacity: 0.2;
+    }
+    
+    #menuCollapse .content {
+      display: none;
+    }
+    
+    @media screen and (max-width: 1024px) {
+      #pageTitle {
+        padding: 0 0.5em;
+        width: calc(100% - 1em) !important;
+      }
+      
+      #menuButton,
+      #menuCollapse .content {
+        display: inherit;
+      }
     }
   </style>
     
   <template>
     <div id="pageTitle">
       <div class="layout horizontal center">
-        <span>
-        {{getPageName(lang, pageInfo)}}
-        </span>
-        <div id="search" class="layout horizontal center">
+        <div class="layout horizontal center">
+          <i id="menuButton" class="material-icons icon action icon36" on-click=toggleMenu>menu</i>
+          <iron-collapse id="menuCollapse" class="iron-collapse-closed" no-animation>
+            <div class="content layout horizontal center">
+              <div class="overlay" on-click=toggleMenu></div>
+            </div>
+          </iron-collapse>
+          <span id="pageLabel">
+            {{getPageName(lang, pageInfo)}}
+          </span>
+        </div>
+        <div id="searchContainer" class="layout horizontal center">
           <iron-collapse id="searchInputCollapse" class="iron-collapse-closed" horizontal=true>
             <div class="content layout horizontal center">
               <input id="searchInput" type="text" autocomplete="off" on-keyup=onKeyPress>
             </div>
           </iron-collapse>
-          <div class="icon action search white icon36" on-click=toggleSearch></div>
+          <i class="material-icons icon action icon36" on-click=toggleSearch>search</i>
         </div>
       </div>
     </div>
@@ -48,6 +96,12 @@
       behaviors: [ElaiJSBehaviors.Basic,
                   ElaiJSBehaviors.Navigator
       ],
+      properties: {
+        pageInfo: {
+          type: Object,
+          observer: "hideMenu"
+        }
+      },
       getPageName: function(lang, pageInfo) {
         return lang.get(pageInfo.name || pageInfo.page);
       },
@@ -55,6 +109,14 @@
         this.$.searchInputCollapse.toggle();
         this.$.searchInput.select();
         this.$.searchInput.focus();
+      },
+      toggleMenu: function () {
+        this.$.menuCollapse.toggle();
+        this.fire("displayNavigation", this.$.menuCollapse.opened);
+      },
+      hideMenu: function() {
+        if(this.$.menuCollapse.opened)
+          this.toggleMenu();
       },
       onKeyPress: function(event, detail, sender) {
         if(event.keyCode == 13) {
@@ -67,7 +129,7 @@
           var q = "site:elaijs.com+" + value;
           window.open("https://www.google.com/search?q=" + q);
           
-          this.$.searchInputCollapse.toggle();
+          this.$.searchInputCollapse.hide();
         }
       }
     });

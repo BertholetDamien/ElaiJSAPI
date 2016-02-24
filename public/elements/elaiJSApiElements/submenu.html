@@ -20,13 +20,12 @@
     }
     
     .subMenu > .link a {
-      padding: 0.3em var(--padding-link);
+      padding: 0.4em var(--padding-link);
     }
     
-    .icon {
-      padding-left: calc(var(--padding-link) + 30px) !important;
-      width: calc(100% - var(--padding-link)*2 - 30px) !important;
-      background-position: var(--padding-link) center;
+    i {
+      margin-right: calc(var(--padding-link) / 2);
+      font-size: 30px;
     }
     
     .link {
@@ -55,7 +54,10 @@
     <div class="subMenu">
       <template is="dom-if" if="[[hasSubMenus]]">
         <div class="link" on-click=toggleSubMenus>
-          <a class$="icon icon24 [[pagename]]">{{get(lang, pagename)}}</a>
+          <a>
+            <i class="material-icons">[[iconname]]</i>
+            <span>{{get(lang, pagename)}}</span>
+          </a>
         </div>
         <iron-collapse class="subItems iron-collapse-closed">
           <div class="content">
@@ -71,7 +73,10 @@
       <template is="dom-if" if="[[!hasSubMenus]]">
         <div class="subMenu">
           <div class="link">
-            <a href$="[[buildHash(pagename)]]" class$="icon icon24 [[pagename]]">{{get(lang, pagename)}}</a>
+            <a href$="[[buildHash(pagename)]]">
+              <i class="material-icons">[[iconname]]</i>
+              <span>{{get(lang, pagename)}}</span>
+            </a>
           </div>
         </div>
       </template>
@@ -104,10 +109,10 @@
         this.querySelector(".subItems").toggle();
       },
       showSubMenus: function(timer) {
-        var _this = this;
-        setTimeout(function() {
-          _this.querySelector(".subItems").show();
-        }, timer);
+        var elemSubItems = this.querySelector(".subItems");
+        elemSubItems.noAnimation = true;
+        elemSubItems.show();
+        elemSubItems.noAnimation = false;
       },
       buildSubMenuHash: function(name) {
         return this.buildHash({page: this.pagename, name: name});
@@ -120,7 +125,7 @@
           toggleActive(this.querySelector(".subItems .active"), false);
           toggleActive(this.getSubLink(this.pageInfo.name), true);
           if(isPage)
-            this.showSubMenus(500);
+            this.showSubMenus();
         }
         
         toggleActive(elemLink, isPage);

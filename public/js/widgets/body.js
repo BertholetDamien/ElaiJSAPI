@@ -5,7 +5,12 @@ define([  "elaiJS/multicallback", "elaiJS/navigator"],
     
     this.afterCreate = function () {
       navigator.bind(navigator.EVENT.pageChanged, pageChanged, undefined, this);
+      this.viewEvents = {"changeNavigationOpacity": changeNavigationOpacity};
     };
+    
+    function changeNavigationOpacity(value) {
+      this.children.navigationArea.changeNavigationOpacity(value);
+    }
     
 		this._initialize = function _initialize(callback) {
 		  var multiCBFct = multicallback(2, callback);

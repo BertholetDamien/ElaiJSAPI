@@ -1,9 +1,19 @@
-<dom-module id="widget-navigationArea">
+f<dom-module id="widget-navigationArea">
   <style>
     :host {
+      --select-color: #9E9E9E;
+      
       position: fixed;
       height: 100%;
       width: var(--navigationArea-width);
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    
+    :host, :host > * {
+      opacity: 1;
+      transition: opacity 300ms ease-out;
     }
     
     #navigationAreaContainer {
@@ -28,12 +38,13 @@
     }
     
     #logoContainer {
-      border-bottom: var(--border-size) solid var(--very-dark-black-color);;
+      border-bottom: 1px solid var(--border-menu-color);
+      background-color: #313131;
       flex-basis: auto;
     }
     
     #logoContainer > div {
-      height: var(--logo-height);
+      height: calc(var(--logo-height) + var(--border-size) - 1px);
       margin: auto;
     }
     
@@ -44,6 +55,18 @@
     
     #navigationFooter {
       flex-basis: 2em;
+      position: relative;
+    }
+    
+    #navigationFooter::after {
+      font-family: 'Material Icons';
+      content: "\e313";
+      color: var(--select-color);
+      position: absolute;
+      top: calc(100% - 36px);
+      right: 0;
+      font-size: 36px;
+      height: 100%;
     }
     
     #navigationFooter select {
@@ -53,7 +76,7 @@
       border: 0;
       background-color: var(--very-dark-black-color);
       background-position: right center;
-      color: #9E9E9E;
+      color: var(--select-color);
       font-family: var(--font-family);
       cursor: pointer;
       
@@ -62,9 +85,19 @@
       -webkit-appearance:none;
     }
     
-    #navigationFooter select:hover,
-    #navigationFooter select:focus {
+    #navigationFooter:hover select,
+    #navigationFooter:hover::after {
       color: var(--light-white-color);
+    }
+    
+    @media screen and (max-width: 1024px) {
+      :host.minOpacity, :host.minOpacity > * {
+        opacity: 0;
+      }
+      
+      :host #navigationAreaContainer {
+        box-shadow: 8px 0px 20px #212121;
+      }
     }
     
   </style>
@@ -72,11 +105,11 @@
   <template>
     <div id="navigationAreaContainer" class="layout vertical center">
       <div id="logoContainer" class="layout center horizontal">
-        <div><a href="#"><img src="/images/logo.png"></a></div>
+        <div><a href="#"><img src="/images/logo.png"/></a></div>
       </div>
       <div id="menuContainer"><elaijsapi-menu></elaijsapi-menu></div>
       <div id="navigationFooter">
-        <select on-change=languageSelected class="layout center horizontal icon icon36 arrow_down light_white hover_white">
+        <select on-change=languageSelected class="layout center horizontal">
           <option value="fr">Français</option>
           <option value="en">English</option>
         </select>

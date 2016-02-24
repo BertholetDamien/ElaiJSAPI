@@ -15,17 +15,20 @@
   },
   "menu": [
     {
-      "key": "home"
+      "key": "home",
+      "icon": "home"
     },
     {
       "key": "documentation",
+      "icon": "description",
       "subMenus": ["general", "navigator", "language", "widget", "plugin"]
     },
     {
-      "key": "download"
+      "key": "download",
+      "icon": "file_download"
     }
   ],
   "page404": "404",
-  "setDefaultNavigationFunctions" : true,
+  "skipNavigatorInitialization": true,
   "skipLocalisationInitialization": true
 }

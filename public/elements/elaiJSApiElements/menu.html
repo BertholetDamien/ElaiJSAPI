@@ -5,11 +5,7 @@
     }
     
     :host > div {
-      border-top: 1px solid white;
-    }
-    
-    :host > div:first-child {
-      border-top: 0;
+      border-bottom: 1px solid var(--border-menu-color);
     }
     
   </style>
@@ -17,7 +13,7 @@
   <template>
     <template is="dom-repeat" items="[[config.menu]]">
       <div>
-        <elaijsapi-submenu pagename="[[item.key]]" submenus$="[[item.subMenus]]"></elaijsapi-submenu>
+        <elaijsapi-submenu iconname="[[item.icon]]" pagename="[[item.key]]" submenus$="[[item.subMenus]]"></elaijsapi-submenu>
       </div>
     </template>
   </template>

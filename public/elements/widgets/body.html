@@ -4,6 +4,7 @@
       --logo-height: 100px;
       --border-size: 4px;
       --navigationArea-width: 300px;
+      --border-menu-color: white;
     }
     
     #navigationArea {
@@ -23,12 +24,23 @@
       padding: 0.5em 3em;
       text-align: justify;
     }
+    
+    @media screen and (max-width: 1024px) {
+      #navigationArea.minInvisible {
+        display: none !important;
+      }
+      
+      #pageBody {
+        padding-left: 0 !important;
+        width: 100% !important;
+      }
+    }
   </style>
     
   <template>
-    <div id="navigationArea"></div>
+    <div id="navigationArea" class="minInvisible"></div>
     <div id="pageBody">
-      <elaijsapi-pageBanner></elaijsapi-pageBanner>
+      <elaijsapi-pageBanner id="pageBanner"></elaijsapi-pageBanner>
       <div id="page"></div>
       <elaijsapi-footer></elaijsapi-footer>
     </div>
@@ -38,7 +50,23 @@
     ElaiJSBehaviors.wait(function() {
     Polymer({
       is: 'widget-body',
-      behaviors: [ElaiJSBehaviors.Basic]
+      behaviors: [ElaiJSBehaviors.Basic],
+      attached: function() {
+        var _this = this;
+        
+        _this.fire("changeNavigationOpacity", true);
+        this.$.pageBanner.addEventListener("displayNavigation", function(event) {
+          var elemNav = _this.$.navigationArea;
+          if(event.detail)
+            elemNav.classList.remove("minInvisible");
+          else
+            elemNav.classList.add("minInvisible");
+          
+          setTimeout(function() {
+            _this.fire("changeNavigationOpacity", !event.detail);
+          }, 50);
+        });
+      }
     });
     });
   </script>

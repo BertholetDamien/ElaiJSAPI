@@ -41,8 +41,6 @@ define(["elaiJS/configuration", "elaiJS/navigator", "elaiJS/widget"],
 
 /*
   TODO:
-    Faire le mode phone
-    
     Creer les pages necessaires
     Ecrire la page de Download
     Ecrire la page d'acceuil
@@ -50,4 +48,5 @@ define(["elaiJS/configuration", "elaiJS/navigator", "elaiJS/widget"],
     
     Integrer ElaiJS avec bower
     Add ReadMe into GitHub
+    Read about compression gzip
 */
