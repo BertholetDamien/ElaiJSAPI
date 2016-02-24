@@ -1,34 +1,36 @@
 {
-  "defaultPlugins": {
-    "elaiJS/polymerend": {}
-  },
-  "homePage": "home",
-  "loadThemeAsPolymerMixin": true,
-  "languages": [
-      {"code": "fr", "label": "Français"},
-      {"code": "en", "label": "English"}
-  ],
-  "ressources": {
-    "WebComponent": "widget-{{name}}",
-    "WebComponentMode": "widget-{{name}}-{{mode}}",
-    "theme": "{{ressources}}/themes/{{name}}.json"
-  },
-  "menu": [
-    {
-      "key": "home",
-      "icon": "home"
+  "elaiJS": {
+    "homePage": "home",
+    "skipNavigatorInitialization": true,
+    "skipLocalisationInitialization": true,
+    "defaultPlugins": {
+      "elaiJS/polymerend": {}
     },
-    {
-      "key": "documentation",
-      "icon": "description",
-      "subMenus": ["general", "navigator", "language", "widget", "plugin"]
-    },
-    {
-      "key": "download",
-      "icon": "file_download"
+    "languages": [
+        {"code": "fr", "label": "Français"},
+        {"code": "en", "label": "English"}
+    ],
+    "ressources": {
+      "WebComponent": "widget-{{name}}",
+      "theme": "{{ressources}}/themes/{{name}}.json"
     }
-  ],
-  "page404": "404",
-  "skipNavigatorInitialization": true,
-  "skipLocalisationInitialization": true
+  },
+  "app": {
+    "menu": [
+      {
+        "key": "home",
+        "icon": "home"
+      },
+      {
+        "key": "documentation",
+        "icon": "description",
+        "subMenus": ["general", "navigator", "language", "widget", "plugin"]
+      },
+      {
+        "key": "download",
+        "icon": "file_download"
+      }
+    ],
+    "page404": "404"
+  }
 }

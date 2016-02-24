@@ -7,12 +7,12 @@ define(["elaiJS/configuration", "elaiJS/navigator", "elaiJS/widget"],
   }
   
   function setDefaultConfig() {
-    var basicExtractor = config.extractPageInfo;
+    var basicExtractor = config.elaiJS.extractPageInfo;
     
-    config.extractPageInfo = function (hash) {
+    config.elaiJS.extractPageInfo = function (hash) {
       var pageInfo = basicExtractor(hash);
       if(!pageAvailable(pageInfo)) {
-        pageInfo.page = config.page404;
+        pageInfo.page = config.app.page404;
         pageInfo.name = undefined;
       }
       
@@ -20,8 +20,8 @@ define(["elaiJS/configuration", "elaiJS/navigator", "elaiJS/widget"],
     };
     
     function pageAvailable(pageInfo) {
-      for(var i in config.menu) {
-        var menu = config.menu[i];
+      for(var i in config.app.menu) {
+        var menu = config.app.menu[i];
         if(menu.key === pageInfo.page) {
           if(!menu.subMenus)
             return true;

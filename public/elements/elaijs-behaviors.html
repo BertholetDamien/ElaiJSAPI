@@ -66,13 +66,13 @@
         if(!helper.isObject(params))
           params = {page: params};
         
-        return config.buildHash(params);
+        return config.elaiJS.buildHash(params);
       },
       getVersionURL: function(url) {
-        if(!config.version)
+        if(!config.elaiJS.version)
           return url;
         
-        return url + "?v=" + config.version;
+        return url + "?v=" + config.elaiJS.version;
     	}
     };
     

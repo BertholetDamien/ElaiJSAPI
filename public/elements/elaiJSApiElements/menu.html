@@ -11,7 +11,7 @@
   </style>
 
   <template>
-    <template is="dom-repeat" items="[[config.menu]]">
+    <template is="dom-repeat" items="[[config.app.menu]]">
       <div>
         <elaijsapi-submenu iconname="[[item.icon]]" pagename="[[item.key]]" submenus$="[[item.subMenus]]"></elaijsapi-submenu>
       </div>
