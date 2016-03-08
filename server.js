@@ -11,6 +11,7 @@ var app = express();
 app.use(compression());
 app.use(express.static('./public'));
 app.use(express.static('../ElaiJS'));
+app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
