@@ -8,7 +8,11 @@ define([], function() {
   
 	properties.builder = function() {
 	  this.getWebComponentInfo = function() {
-      return this.name + "-" + this.params.name + "-" + lang.getLanguage();
+      return {
+        name: this.params.name,
+        lang: lang.getLanguage(),
+        ressource: "documentation"
+      };
     };
 	};
   

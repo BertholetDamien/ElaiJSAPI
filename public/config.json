@@ -12,7 +12,8 @@
     ],
     "ressources": {
       "WebComponent": "widget-{{name}}",
-      "theme": "{{ressources}}/themes/{{name}}.json"
+      "theme": "{{ressources}}/themes/{{name}}.json",
+      "documentation": "doc-{{name}}-{{lang}}"
     }
   },
   "app": {
@@ -24,7 +25,11 @@
       {
         "key": "documentation",
         "icon": "description",
-        "subMenus": ["general", "navigator", "language", "widget", "plugin"]
+        "subMenus": [
+          "overview", "requireElaiJS", "configuration", "event", "webservice",
+          "widget", "plugin", "renderer", "navigation", "i18n", "ressources", "mode",
+          "theme", "helper", "debugManager"
+        ]
       },
       {
         "key": "download",

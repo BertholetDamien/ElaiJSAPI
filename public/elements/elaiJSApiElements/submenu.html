@@ -56,14 +56,14 @@
         <div class="link" on-click=toggleSubMenus>
           <a>
             <i class="material-icons">[[iconname]]</i>
-            <span>{{get(lang, pagename)}}</span>
+            <span>{{getMenuLabel(lang, pagename)}}</span>
           </a>
         </div>
         <iron-collapse class="subItems iron-collapse-closed">
           <div class="content">
             <template is="dom-repeat" items="[[submenus]]">
               <div data-name$=[[item]] class="link">
-                <a href="[[buildSubMenuHash(item)]]">{{get(lang, item)}}</a>
+                <a href="[[buildSubMenuHash(item)]]">{{getMenuLabel(lang, item)}}</a>
               </div>
             </template>
           </div>
@@ -75,7 +75,7 @@
           <div class="link">
             <a href$="[[buildHash(pagename)]]">
               <i class="material-icons">[[iconname]]</i>
-              <span>{{get(lang, pagename)}}</span>
+              <span>{{getMenuLabel(lang, pagename)}}</span>
             </a>
           </div>
         </div>
@@ -104,6 +104,13 @@
         setTimeout(function() {
           _this.refreshActiveMenu();
         });
+      },
+      getMenuLabel: function(lang, key) {
+        var label = lang.get(key + "_menu", undefined, lang.getLanguage());
+        if(!label)
+          label = lang.get(key);
+        
+        return label;
       },
       toggleSubMenus: function() {
         this.querySelector(".subItems").toggle();
