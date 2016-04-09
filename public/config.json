@@ -28,7 +28,7 @@
         "subMenus": [
           "overview", "requireElaiJS", "configuration", "event", "webservice",
           "widget", "plugin", "renderer", "navigation", "i18n", "ressources", "mode",
-          "theme", "helper", "debugManager"
+          "storage", "theme", "helper", "debugManager"
         ]
       },
       {

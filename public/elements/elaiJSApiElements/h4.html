@@ -1,0 +1,30 @@
+<dom-module id="elaijsapi-h4">
+  <style>
+    :host div {
+      margin-top: 0.6em;
+      margin-bottom: 0.2em;
+      color: #9FA8DA;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+    
+  </style>
+
+  <template>
+    <div>
+      <content></content>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-h4',
+      TAG: "menu",
+      behaviors: [ElaiJSBehaviors.Basic],
+      properties: {
+      }
+    });
+    });
+  </script>
+</dom-module>

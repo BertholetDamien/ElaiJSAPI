@@ -1,93 +1,74 @@
 <dom-module id="doc-configuration-fr">
   <template>
+    <h2>Description</h2>
     <p>
-      configuration - fr.
+      Le module de <b>configuration</b> permet de stocker et géré un object représentant la configuration.
+      <br/>
+      La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais également les autres configurations que l'on peut vouloir dans son application.
     </p>
+    
+    <elaijsapi-h4>Lecture et écriture</elaijsapi-h4>
+    <dev-code>
+      define(["elaiJS/configuration"], function(config) {
+        // L'object config.elaiJS contient toutes les
+        // configurations d'ElaiJS.
+        console.log(config.elaiJS);
+        
+        // Pour afficher la page d'accueil actuelle
+        console.log(config.elaiJS.homePage);
+        
+        // Pour définir la page d'accueil
+        config.elaiJS.homePage = "NewHomePage";
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Utilisation avancée</elaijsapi-h4>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
+      Pour une configuration, il est aussi utile de pouvoir redéfinir un object tout en gardant les valeurs déjà définies.
+    </p>
+    <dev-code>
+      define(["elaiJS/configuration"], function(config) {
+        // Voici un object.
+        config.obj = {
+          life: "sun",
+          superValue: 42
+        };
+        
+        console.log(config.obj.life);        // output: sun
+        console.log(config.obj.superValue);  // output: 42
+        console.log(config.obj.hasNewValue); // output: undefined
+        
+        // Si on veut définir 'hasNewValue' sur obj, on peut faire ceci:
+        config({
+          obj: {
+            hasNewValue: true
+          }
+        });
+        
+        console.log(config.obj.life);        // output: sun
+        console.log(config.obj.superValue);  // output: 42
+        console.log(config.obj.hasNewValue); // output: true
+        
+        // Si on ne veut pas garder les 'anciennes' valeurs.
+        // Cela permet, par exemple, d'avoir des valeurs définis et d'injecter les valeurs par défaut dans un second temps. Ainsi, seulement les valeurs non définis se verront assigner les valeurs par défaut.
+        config({
+          obj: {
+            hasNewValue: false,
+            onlyValue: "I'm only"
+          }
+        }, true);
+        
+        console.log(config.obj.life);        // output: sun
+        console.log(config.obj.superValue);  // output: 42
+        console.log(config.obj.hasNewValue); // output: true
+        console.log(config.obj.onlyValue);   // output: I'm only
+      });
+    </dev-code>
+    
+    <h2>ElaiJS Configurations</h2>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-
+      
+    </p>
   </template>
   
   <script>

@@ -1,0 +1,152 @@
+<dom-module id="doc-storage-fr">
+  <template>
+    <elaijsapi-h4>Description</elaijsapi-h4>
+    <p>
+      L'object <i>localStorage</i> proposé par les navigateurs est facile à utiliser mais contient quelques lacunes. Le module de Storage fait une abstraction autour de cet object afin d'enlever ces lacunes et de rendre son utilisation plus conviviale.
+    </p>
+    
+    <elaijsapi-h4>Les lacunes du <i>LocalStorage</i></elaijsapi-h4>
+    <ul>
+      <li>
+        On ne peut pas stocker des objects mais seulement des strings.
+      </li>
+      <li>
+        Chaque nom de domaine partagera le même espace de stockage. Parfois, on aimerait en avoir un par chemin d'accès (ex. monsite.com/chemin/dacces).
+      </li>
+      <li>
+        Le système de listener ne permet pas facilement d'écouter les changement d'un item en particulier.
+      </li>
+    </ul>
+    
+    <elaijsapi-h4>Ajouter un item</elaijsapi-h4>
+    <p>
+      A l'ajout d'un item, la valeur de l'item est <i>stringifié</i>. Au moment de récupérer sa valeur, elle est parsé.<br/>
+      Cela permet de stocker des objects, des strings, des booleans ou des entiers de façon complètement transparente.
+    </p>
+     <dev-code>
+      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+        localStorageElaiJS.set("test1", "elaiJS");
+        localStorageElaiJS.set("test2", 42);
+        localStorageElaiJS.set("test3", {elaiJS: 42});
+        
+        console.log(localStorageElaiJS.get("test1"));         // Output: "elaiJS"
+        console.log(localStorageElaiJS.get("test2"));         // Output: 42
+        console.log(localStorageElaiJS.get("test3").elaiJS);  // Output: 42
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Utiliser plusieurs <i>chemin</i></elaijsapi-h4>
+    <p>
+      <b>ElaiJS</b> permet de gérer plusieurs stockages sur un même nom de domaine. Chaque action sur le <i>localStorage</i> d'<b>ElaiJS</b> peut être appelé avec un <i>chemin</i>. Le <i>chemin</i> permet de déterminer dans quel stockage on veut chercher.<br/><br/>
+      Si aucun <i>chemin</i> n'est définit, c'est la configuration "config.elaiJS.storagePath" qui sera utilisé. Cette configuration a par défaut la valeur de "location.pathname". Ex. Dans le cas de <i>monsite.com/chemin</i>, la valeur par défaut sera <i>chemin</i>.
+    </p>
+     <dev-code>
+      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+        localStorageElaiJS.set("test1", "elaiJS");
+        localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
+        localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
+        
+        console.log(localStorageElaiJS.get("test1"));           // Output: elaiJS
+        console.log(localStorageElaiJS.get("test1", "scope1")); // Output: elaiJS du scope1
+        console.log(localStorageElaiJS.get("test1", "scope2")); // Output: elaiJS du scope2
+      });
+    </dev-code>
+    <elaijsapi-note>
+      Ceci ne multiplie pas l'espace alloué par le navigateur sur le nom de domaine. Il est partagé entre les différents <i>chemin</i>.
+    </elaijsapi-note>
+    
+    <elaijsapi-h4>Suppressions des items</elaijsapi-h4>
+    <p>
+      On peut utiliser trois méthodes de suppressions, on peut supprimer:
+    </p>
+    <ul>
+      <li>
+        Un seul item d'un <i>chemin</i> donnée.
+      </li>
+      <li>
+        Tous les items d'un <i>chemin</i>.
+      </li>
+      <li>
+        Tous les items de tous les <i>chemins</i>.
+      </li>
+    </ul>
+    <dev-code>
+      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+        localStorageElaiJS.set("test1", "elaiJS");
+        localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
+        localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
+        localStorageElaiJS.set("test1", "elaiJS du scope3", "scope3");
+        
+        // Suppression de l'item dans le scope par defaut
+        localStorageElaiJS.remove("test1");
+        
+        // Suppression de l'item dans le scope: scope1
+        localStorageElaiJS.remove("test1", "scope1");
+        
+        console.log(localStorageElaiJS.get("test1"));           // Output: null
+        console.log(localStorageElaiJS.get("test1", "scope1")); // Output: null
+        console.log(localStorageElaiJS.get("test1", "scope2")); // Output: elaiJS du scope2
+        console.log(localStorageElaiJS.get("test1", "scope3")); // Output: elaiJS du scope3
+        
+        // Suppression de tous les items du scope2
+        localStorageElaiJS.clear("scope2");
+        
+        console.log(localStorageElaiJS.get("test1", "scope2")); // Output: null
+        console.log(localStorageElaiJS.get("test1", "scope3")); // Output: elaiJS du scope3
+        
+        // Suppression de tous les items de tous les scopes
+        localStorageElaiJS.clearAll();
+        
+        console.log(localStorageElaiJS.get("test1", "scope3")); // Output: null
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Ecouter les changements d'un item</elaijsapi-h4>
+    <p>
+      On peut écouter les changements d'un item. Il y a deux sortes de changements, On peut écouter:
+    </p>
+    <ul>
+      <li>
+        Les changements d'un item effectués par l'onglet courant.
+      </li>
+      <li>
+        Les changements effectués par un autre onglet.
+      </li>
+    </ul>
+    <dev-code>
+      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+        // Comme pour chaque fonction, si aucun scope n'est specifie,
+        // le scope par defaut sera utilise.
+        var scope;
+        
+        // On ecoute les changements de l'onglet courant.
+        localStorageElaiJS.bindCurrentTab("test1", function(event) {
+        console.log("L'item a ete change a partir de cet onglet.");
+          console.log("%o", event.data.key);
+          console.log("%o", event.data.newValue);
+          console.log("%o", event.data.oldValue);
+          console.log("%o", event.data.path); // Le scope
+        }, scope);
+        
+        // On ecoute les changements des autres onglets.
+        localStorageElaiJS.bind("test1", function() {
+          console.log("L'item a ete change a partir d'un autre onglet.");
+        }, scope);
+        
+        localStorageElaiJS.set("test1", "elaiJS", scope);
+      });
+    </dev-code>
+    <elaijsapi-note>
+      Internet Explorer 10, 11 et Edge ont quelques problèmes avec la fonctionnalité d'écoute des autres onglets.
+    </elaijsapi-note>
+    
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'doc-storage-fr'
+    });
+    });
+  </script>
+</dom-module>

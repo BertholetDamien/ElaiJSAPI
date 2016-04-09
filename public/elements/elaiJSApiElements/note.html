@@ -1,0 +1,29 @@
+<dom-module id="elaijsapi-note">
+  <style>
+    :host div {
+      margin: 0.3em 0;
+      padding: 0.1em 0.5em;
+      background-color: #e8eaf6;
+      border-radius: 10px;
+    }
+    
+  </style>
+
+  <template>
+    <div>
+      <content></content>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-note',
+      TAG: "menu",
+      behaviors: [ElaiJSBehaviors.Basic],
+      properties: {
+      }
+    });
+    });
+  </script>
+</dom-module>

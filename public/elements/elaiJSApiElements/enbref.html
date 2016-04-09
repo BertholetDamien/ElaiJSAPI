@@ -1,0 +1,30 @@
+<dom-module id="elaijsapi-enbref">
+  <style>
+    :host div {
+      margin-top: 0.6em;
+      margin-bottom: 0.2em;
+      padding: 0.5em 0.8em;
+      background-color: #c8e6c9;
+      border-radius: 10px;
+    }
+    
+  </style>
+
+  <template>
+    <div>
+      <content></content>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-enbref',
+      TAG: "menu",
+      behaviors: [ElaiJSBehaviors.Basic],
+      properties: {
+      }
+    });
+    });
+  </script>
+</dom-module>
