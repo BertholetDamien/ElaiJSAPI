@@ -22,6 +22,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.2.3",
-    "iron-collapse": "PolymerElements/iron-collapse#^1.0.6"
+    "iron-collapse": "PolymerElements/iron-collapse#^1.0.6",
+    "codemirror": "^5.13.4"
   }
 }
