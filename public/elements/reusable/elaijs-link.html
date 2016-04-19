@@ -1,0 +1,31 @@
+<dom-module id="elaijs-link">
+  <style>
+    a {
+      text-decoration: inherit;
+      color: inherit;
+    }
+  </style>
+  
+  <template><a href=[[buildHash(href)]]><content></content></a></template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijs-link',
+      properties: {
+        href: Object
+      },
+      behaviors: [ElaiJSBehaviors.Basic],
+      ready: function() {
+        var allow = ["page", "name"];
+        
+        var href = {};
+        for(var i in allow)
+          href[allow[i]] = this.getAttribute(allow[i]);
+          
+        this.href = href;
+      }
+    });
+    });
+  </script>
+</dom-module>

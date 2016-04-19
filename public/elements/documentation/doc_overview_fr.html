@@ -7,29 +7,37 @@
     
     <h2>Les modules d'ElaiJS</h2>
     <p>
-      TODO Mettre les liens
-    <elaijsapi-h4>RequireElaiJS</elaijsapi-h4>
-      TODO revoir texte
-      Ce framework est fait à partir de modules imbriqués et chargé selon l'approche AMD (TODO link + explication). ElaiJS intégère un système de loading AMD, c'est le module RequireElaiJS.
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="requireElaiJS">RequireElaiJS</elaijs-link>
+    </elaijsapi-h4>
+      Ce framework est fait à partir de modules imbriqués et chargés selon l'approche AMD (TODO link + explication). ElaiJS intégère un système de loading AMD, c'est le module RequireElaiJS.
       <br/>
       Ce module est très simple et n'implémente pas toutes les fonctionnalités avancé de requireJS. Si vous avez besoin de ces fonctionnalités, vous pouvez facilement utiliser requireJS à la place de RequireElaiJS (Voir ici pour plus de détails).
       
-    <elaijsapi-h4>Configuration</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="configuration">Configuration</elaijs-link>
+    </elaijsapi-h4>
       Le module de <b>configuration</b> permet de stocker et gérer un object représentant la configuration.
       <br/>
       La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais est également utilisable tout autre configuration.
       
-    <elaijsapi-h4>Binder</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="event">Event</elaijs-link>
+    </elaijsapi-h4>
       Les modules d'<b>ElaiJS</b> communique via des évènements. Afin de rendre le tout modulables, c'est le module <b>Binder</b> qui s'occupe de rajouter les fonctionnalités d'évènement  (e.g. bind et fire) à un object donné.
       <br/>
       Ce module permet de rendre un object <i>évènementiable</i> en une ligne de code !
       
-    <elaijsapi-h4>Webservice</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="webservice">Webservice</elaijs-link>
+    </elaijsapi-h4>
     Les WebServices sont tous les appels externes dont un code a besoin. Cela peut être un appel <i>Rest</i> ou récupérer le contenu d'un fichier.
       <br/>
     Ces intéractions avec le(s) serveur(s) sont généralement mal encapsulé dans le code. <b>ElaiJS</b> propose un module de gestion des webservices qui permet de créer ou modifier facilement un service.
     
-    <elaijsapi-h4>Widget</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="widget">Widget</elaijs-link>
+    </elaijsapi-h4>
     ElaiJS intégère un système de widget. Les widgets représentent un élèment graphique du point de vue Controlleur dans le modèle MVC. Chaque controlleur a pour rôle de gérer les intéractions avec l'extérieur (autres widgets ou webservices), de traiter les données et de choisir la méthode d'affichage du Widget.
     <br/>
     <br/>
@@ -38,34 +46,52 @@
     ElaiJS ne permet pas de simplifier l'interaction avec le DOM. Ce n'est pas un framework tel que JQuery, React, AngularJS, Polymer, ...
     Cependant, les Widgets peuvent décider de s'affichaque grâce à un de ces outils.
     
-    <elaijsapi-h4>Plugin</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="plugin">Plugin</elaijs-link>
+    </elaijsapi-h4>
     Les plugins permettent de rajouter des fonctionnalités à un Widget. En évitant d'avoir du code en double, ceci permet une maintenance du code et gestion des widgets.
     
-    <elaijsapi-h4>Navigation</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="navigation">Navigation</elaijs-link>
+    </elaijsapi-h4>
     La navigation des pages se fait grâce au changement du hash du navigateur. Ceci est totalement paramétrable et permet un contrôle totale du chargement des pages.
     
-    <elaijsapi-h4>Internationalisation</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="i18n">Internationalisation</elaijs-link>
+    </elaijsapi-h4>
     Ce module permet la gestion de la langue et la localisation de l'application.
     
-    <elaijsapi-h4>Ressources</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="ressources">Ressources</elaijs-link>
+    </elaijsapi-h4>
     Ce module permet d'utiliser un système de ressources. Une ressource est une configuration qui peut est définie en fonction d'une autre ressource ou bien de paramètres externes.<br/>
     Cela permet, entre autre, de configurer des chemins d'accès utilisés par <b>ElaiJS</b> afin de déterminer où sont certaines ressources importantes comme les widgets, les thèmes, les plugins, ...
     
-    <elaijsapi-h4>Mode</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="mode">Mode</elaijs-link>
+    </elaijsapi-h4>
     Les modes permettent d'avoir un mode d'utilisation pour certains wigets/plugins.
     
-    <elaijsapi-h4>Storage</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="storage">Stockage</elaijs-link>
+    </elaijsapi-h4>
     L'object <i>localStorage</i> proposé par les navigateurs est facile à utiliser mais contient quelques lacunes. Le module de Storage fait une abstraction autour de cet object afin d'enlever ces lacunes et de rendre son utilisation plus conviviale.
     <br/><br/>
     Notamment, il est très simple de pouvoir communiquer entre deux onglets du même site grâce à ce module !
     
-    <elaijsapi-h4>Theme</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="theme">Theme</elaijs-link>
+    </elaijsapi-h4>
     Les applications ayant plusieurs thèmes peuvent utiliser le module de <i>thème</i>.
     
-    <elaijsapi-h4>Helper</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="helper">Helper</elaijs-link>
+    </elaijsapi-h4>
     Ce module contient juste quelques fonctions utilitaires. On peut en rajouter ou en modifier facilement.
     
-    <elaijsapi-h4>DebugManager</elaijsapi-h4>
+    <elaijsapi-h4>
+      <elaijs-link page="documentation" name="debugManager">Mode Debug</elaijs-link>
+    </elaijsapi-h4>
     Le DebugManager permet de gérer le mode de l'application. Actuellement, il ne fait que rajouter les modules dans le scope de l'object window pour un debug plus facile.
     
     <elaijsapi-h4>Autres</elaijsapi-h4>

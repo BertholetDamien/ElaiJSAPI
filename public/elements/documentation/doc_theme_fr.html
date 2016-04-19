@@ -51,8 +51,9 @@
     
     <elaijsapi-h4>Changer le chargement et le déchargement des thèmes</elaijsapi-h4>
     <p>
-      Les thèmes sont chargés et déchargés grâce à des webservices (voir le module <b>Webservice</b>). Il suffit de redéfinir ces derniers pour changer la façon dont on charge et décharge les thèmes. Cela rend abstrait ce qu'est un thème.<br/><br/>
-      Par défaut, les webservices ajoutent ou enlevent une balise <i>link</i> dans la balise <i>HEAD</i> du <i>DOM</i>. L'url du fichier sera définit via la ressource <i>theme</i> (voir le module <b>Ressource</b> pour plus d'information).
+      Les thèmes sont chargés et déchargés grâce à des webservices (voir le module <elaijs-link page="documentation" name="webservice"><i><b>Webservice</b></i></elaijs-link>). Il suffit de redéfinir ces derniers pour changer la façon dont on charge et décharge les thèmes. Cela rend abstrait ce qu'est un thème.<br/><br/>
+      
+      Par défaut, les webservices ajoutent ou enlevent une balise <i>link</i> dans la balise <i>HEAD</i> du <i>DOM</i>. L'url du fichier sera définit via la ressource <i>theme</i> (voir le module <elaijs-link page="documentation" name="ressources"><i><b>Ressource</b></i></elaijs-link> pour plus d'information).
     </p>
     <dev-code>
       define(["elaiJS/webservice"], function(webservice) {
