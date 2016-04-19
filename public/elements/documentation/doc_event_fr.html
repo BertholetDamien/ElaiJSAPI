@@ -2,16 +2,15 @@
   <template>
     <h2>Description</h2>
     <p>
-      Les modules d'<b>ElaiJS</b> communique généralement via des évènements. Afin de rendre le tout modulables, c'est le module <b>Binder</b> qui s'occupe de rajouter ces fonctionnalités (e.g. bind et fire) à un object donné.
-    </p>
+      Les modules d'<b>ElaiJS</b> communique via des évènements. Afin de rendre le tout modulables, c'est le module <b>Binder</b> qui s'occupe de rajouter les fonctionnalités d'évènement  (e.g. bind et fire) à un object donné.
     
     <elaijsapi-h4>Rendre un object évènementiable</elaijsapi-h4>
     <dev-code>
       define(["elaiJS/binder"], function(binder) {
         var obj = {};
+        // On ajoute les fonctions d'évènements.
         binder.addFunctions(obj);
-      
-        // Vous pouvez maintenant utiliser les évènements sur cet object.
+        
         // On bind l'évènement à une fonction.
         obj.bind("superEventCustom", function(event) {
           console.log("Je suis un super Event Custom %o", event);
@@ -34,7 +33,7 @@
           console.log("Je suis un global Event %o", event);
         });
         
-        // Et on lance l'évènement Global!
+        // Et on lance l'évènement Global !
         binder.fireGlobal("globalEvent");
       });
     </dev-code>

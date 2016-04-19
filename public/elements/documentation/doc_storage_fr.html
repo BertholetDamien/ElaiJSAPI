@@ -1,6 +1,6 @@
 <dom-module id="doc-storage-fr">
   <template>
-    <elaijsapi-h4>Description</elaijsapi-h4>
+    <h2>Description</h2>
     <p>
       L'object <i>localStorage</i> proposé par les navigateurs est facile à utiliser mais contient quelques lacunes. Le module de Storage fait une abstraction autour de cet object afin d'enlever ces lacunes et de rendre son utilisation plus conviviale.
     </p>
@@ -29,8 +29,8 @@
         localStorageElaiJS.set("test2", 42);
         localStorageElaiJS.set("test3", {elaiJS: 42});
         
-        console.log(localStorageElaiJS.get("test1"));         // Output: "elaiJS"
-        console.log(localStorageElaiJS.get("test2"));         // Output: 42
+        console.log(localStorageElaiJS.get("test1"));           // Output: "elaiJS"
+        console.log(localStorageElaiJS.get("test2"));           // Output: 42
         console.log(localStorageElaiJS.get("test3").elaiJS);  // Output: 42
       });
     </dev-code>
@@ -46,7 +46,7 @@
         localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
         localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
         
-        console.log(localStorageElaiJS.get("test1"));           // Output: elaiJS
+        console.log(localStorageElaiJS.get("test1"));             // Output: elaiJS
         console.log(localStorageElaiJS.get("test1", "scope1")); // Output: elaiJS du scope1
         console.log(localStorageElaiJS.get("test1", "scope2")); // Output: elaiJS du scope2
       });
@@ -103,7 +103,7 @@
     
     <elaijsapi-h4>Ecouter les changements d'un item</elaijsapi-h4>
     <p>
-      On peut écouter les changements d'un item. Il y a deux sortes de changements, On peut écouter:
+      Il y a deux sortes de changements que l'on peut écouter:
     </p>
     <ul>
       <li>
@@ -115,8 +115,7 @@
     </ul>
     <dev-code>
       define(["elaiJS/localStorage"], function(localStorageElaiJS) {
-        // Comme pour chaque fonction, si aucun scope n'est specifie,
-        // le scope par defaut sera utilise.
+        // Comme pour chaque fonction, si aucun scope n'est specifie, le scope par defaut sera utilise.
         var scope;
         
         // On ecoute les changements de l'onglet courant.
@@ -137,7 +136,7 @@
       });
     </dev-code>
     <elaijsapi-note>
-      Internet Explorer 10, 11 et Edge ont quelques problèmes avec la fonctionnalité d'écoute des autres onglets.
+      Internet Explorer 10, 11 et Edge supportement mal la fonctionnalité d'écoute des autres onglets.
     </elaijsapi-note>
     
   </template>

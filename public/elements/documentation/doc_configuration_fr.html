@@ -2,16 +2,15 @@
   <template>
     <h2>Description</h2>
     <p>
-      Le module de <b>configuration</b> permet de stocker et géré un object représentant la configuration.
+      Le module de <b>configuration</b> permet de stocker et gérer un object représentant la configuration.
       <br/>
-      La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais également les autres configurations que l'on peut vouloir dans son application.
+      La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais est également utilisable tout autre configuration.
     </p>
     
     <elaijsapi-h4>Lecture et écriture</elaijsapi-h4>
     <dev-code>
       define(["elaiJS/configuration"], function(config) {
-        // L'object config.elaiJS contient toutes les
-        // configurations d'ElaiJS.
+        // L'object config.elaiJS contient toutes les configurations d'ElaiJS.
         console.log(config.elaiJS);
         
         // Pour afficher la page d'accueil actuelle
@@ -28,13 +27,12 @@
     </p>
     <dev-code>
       define(["elaiJS/configuration"], function(config) {
-        // Voici un object.
         config.obj = {
           life: "sun",
           superValue: 42
         };
         
-        console.log(config.obj.life);        // output: sun
+        console.log(config.obj.life);          // output: sun
         console.log(config.obj.superValue);  // output: 42
         console.log(config.obj.hasNewValue); // output: undefined
         
@@ -45,12 +43,11 @@
           }
         });
         
-        console.log(config.obj.life);        // output: sun
+        console.log(config.obj.life);          // output: sun
         console.log(config.obj.superValue);  // output: 42
         console.log(config.obj.hasNewValue); // output: true
         
-        // Si on ne veut pas garder les 'anciennes' valeurs.
-        // Cela permet, par exemple, d'avoir des valeurs définis et d'injecter les valeurs par défaut dans un second temps. Ainsi, seulement les valeurs non définis se verront assigner les valeurs par défaut.
+        // Dans certains cas, on aimerait pouvoir injecter des valeurs par défauts dans la configuration. Seulement les valeurs non définis se verront assigner les valeurs de l'object dans ce cas là.
         config({
           obj: {
             hasNewValue: false,

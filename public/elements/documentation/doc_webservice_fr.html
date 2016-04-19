@@ -2,7 +2,7 @@
   <template>
     <h2>Description</h2>
     <p>
-      Les WebServices sont tous les appelles externes dont un code a besoin. Cela peut être un appel <i>Rest</i> ou récupérer le contenu d'un fichier.
+      Les WebServices sont tous les appels externes dont un code a besoin. Cela peut être un appel <i>Rest</i> ou récupérer le contenu d'un fichier.
       <br/>
       Ces intéractions avec le(s) serveur(s) sont généralement mal encapsulé dans le code. <b>ElaiJS</b> propose un module de gestion des webservices qui permet de créer ou modifier facilement un service.
       <br/>
@@ -34,7 +34,7 @@
     
     <elaijsapi-h4>Le cache</elaijsapi-h4>
     <p>
-      Chaque service peut utiliser un cache. Cela signifie que si on appelle deux fois le mêmes services avec des paramètres identiques, le service serait exécuté qu'une fois et lors du deuxième appel, le résultat du cache sera retourné.<br/>
+      Chaque service peut utiliser un cache. Cela signifie que si on appel deux fois le mêmes services avec des paramètres identiques, le service sera exécuté qu'une fois et lors du deuxième appel, le résultat du cache sera retourné.<br/>
     </p>
     <elaijsapi-note>
       On peut changer cette configuration par service à n'importe quel moment.
@@ -114,7 +114,7 @@
     
     <elaijsapi-h4>Appel multiple asynchrone avec cache</elaijsapi-h4>
     <p>
-      Si durant l'exécution d'un service, dont le résultat ira dans le cache, un autre appel est effectué avec les mêmes paramètres, alors le deuxième appel ne sera pas exécuté et attendra la fin de l'exécution du premier pour récupérer la valeur mise dans le cache.
+      Quand un service utilisant le cache est en cours d'éxécution, il est mit dans une liste. Si ce même service est appelé avec les même paramètres, il sera mis en attente de l'éxécution du premier appel. Ainsi, le service ne sera exécuté qu'une seule fois.
     </p>
     <dev-code>
       define(["elaiJS/webservice"], function(webservice) {
@@ -183,6 +183,10 @@
       <li>After Listener</li>
     </ul>
     
+    <elaijsapi-note>
+      Contrairement aux listeners, les intercepteurs devront appeler une fonction de callback afin d'annoncer la fin de leur exécution. Cela permet de s'assurer que les intercepteurs ont finis de s'éxécuter avant de retourner le résultat finale.
+    </elaijsapi-note>
+    
     <dev-code>
       define(["elaiJS/webservice"], function(webservice) {
         webservice.addService("simple", function(params, callback, errorCallback) {
@@ -220,6 +224,25 @@
       Pour changer un service, il faut ajouter un nouveau service avec le même nom que celui qu'on veut remplacer.<br/>
       Cela aura pour conséquence de supprimer le cache de ce service ainsi que ces intercepteurs et listeners.
     </p>
+    <dev-code>
+      define(["elaiJS/webservice"], function(webservice) {
+        webservice.addService("simple", function(params, callback, errorCallback) {
+          callback(42);
+        });
+        
+        webservice.simple(undefined, function(result) {
+          console.log(result); //Ouput: 42
+        });
+        
+        webservice.addService("simple", function(params, callback, errorCallback) {
+          callback("43");
+        });
+        
+        webservice.simple(undefined, function(result) {
+          console.log(result); //Ouput: 43
+        });
+      });
+    </dev-code>
     
     <elaijsapi-h4>Defaut WebServices</elaijsapi-h4>
     <p>

@@ -15,18 +15,18 @@
       Ce module est très simple et n'implémente pas toutes les fonctionnalités avancé de requireJS. Si vous avez besoin de ces fonctionnalités, vous pouvez facilement utiliser requireJS à la place de RequireElaiJS (Voir ici pour plus de détails).
       
     <elaijsapi-h4>Configuration</elaijsapi-h4>
-      Le module de configuration permet de stocker et géré un object représentant la configuration.
+      Le module de <b>configuration</b> permet de stocker et gérer un object représentant la configuration.
       <br/>
-      La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais également les autres configurations que l'on peut vouloir dans son application.
+      La configuration permet de définir le comportement des modules d'<b>ElaiJS</b> mais est également utilisable tout autre configuration.
       
     <elaijsapi-h4>Binder</elaijsapi-h4>
-      Les modules d'<b>ElaiJS</b> communique généralement via des évènements. Afin de rendre le tout modulables, c'est le module <b>Binder</b> qui s'occupe de rajouter ces fonctionnalités (e.g. bind et fire) à un object donné.
+      Les modules d'<b>ElaiJS</b> communique via des évènements. Afin de rendre le tout modulables, c'est le module <b>Binder</b> qui s'occupe de rajouter les fonctionnalités d'évènement  (e.g. bind et fire) à un object donné.
       <br/>
       Ce module permet de rendre un object <i>évènementiable</i> en une ligne de code !
       
     <elaijsapi-h4>Webservice</elaijsapi-h4>
-    Les WebServices sont tous les appelles externes dont un code a besoin. Cela peut être un appel <i>Rest</i> ou récupérer le contenu d'un fichier.
-    <br/>
+    Les WebServices sont tous les appels externes dont un code a besoin. Cela peut être un appel <i>Rest</i> ou récupérer le contenu d'un fichier.
+      <br/>
     Ces intéractions avec le(s) serveur(s) sont généralement mal encapsulé dans le code. <b>ElaiJS</b> propose un module de gestion des webservices qui permet de créer ou modifier facilement un service.
     
     <elaijsapi-h4>Widget</elaijsapi-h4>
@@ -48,14 +48,14 @@
     Ce module permet la gestion de la langue et la localisation de l'application.
     
     <elaijsapi-h4>Ressources</elaijsapi-h4>
-    Ce module permet d'utiliser un système de ressources. Une ressource est une sorte de configuration avancée. Une ressource peut est définie en fonction d'une autre ressource ou bien de paramètres externes.<br/>
+    Ce module permet d'utiliser un système de ressources. Une ressource est une configuration qui peut est définie en fonction d'une autre ressource ou bien de paramètres externes.<br/>
     Cela permet, entre autre, de configurer des chemins d'accès utilisés par <b>ElaiJS</b> afin de déterminer où sont certaines ressources importantes comme les widgets, les thèmes, les plugins, ...
     
     <elaijsapi-h4>Mode</elaijsapi-h4>
     Les modes permettent d'avoir un mode d'utilisation pour certains wigets/plugins.
     
     <elaijsapi-h4>Storage</elaijsapi-h4>
-    L'object <i>localStorage</i> proposé par les navigateurs est facile à utiliser mais contient quelques lacunes. Le module de Storage d'<b>ElaiJS</b> fait une abstraction autour de cet object afin de rendre son utilisation plus conviviale.
+    L'object <i>localStorage</i> proposé par les navigateurs est facile à utiliser mais contient quelques lacunes. Le module de Storage fait une abstraction autour de cet object afin d'enlever ces lacunes et de rendre son utilisation plus conviviale.
     <br/><br/>
     Notamment, il est très simple de pouvoir communiquer entre deux onglets du même site grâce à ce module !
     
@@ -63,7 +63,7 @@
     Les applications ayant plusieurs thèmes peuvent utiliser le module de <i>thème</i>.
     
     <elaijsapi-h4>Helper</elaijsapi-h4>
-    Ce module contient juste quelques fonctions utilitaires. On peut en rajouter ou modifier les existantes facilement.
+    Ce module contient juste quelques fonctions utilitaires. On peut en rajouter ou en modifier facilement.
     
     <elaijsapi-h4>DebugManager</elaijsapi-h4>
     Le DebugManager permet de gérer le mode de l'application. Actuellement, il ne fait que rajouter les modules dans le scope de l'object window pour un debug plus facile.

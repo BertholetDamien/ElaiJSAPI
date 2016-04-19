@@ -1,6 +1,6 @@
 <dom-module id="doc-theme-fr">
   <template>
-    <elaijsapi-h4>Description</elaijsapi-h4>
+    <h2>Description</h2>
     <p>
       Les applications ayant plusieurs thèmes peuvent utiliser le module de <i>thème</i>.<br/>
       Ce module permet, bien évidemment, de gérer plusieurs thèmes. Dans la configuration, on peut spécifier un thème par défaut qui se charge au démarrage d'<b>ElaiJS</b>.<br/>
@@ -51,10 +51,8 @@
     
     <elaijsapi-h4>Changer le chargement et le déchargement des thèmes</elaijsapi-h4>
     <p>
-      Les thèmes sont chargés et déchargés grâce à des webservices (voir module <b>webservice</b>). Il suffit de redéfinir ces derniers pour changer la façon dont on charge et décharge les thèmes.<br/><br/>
-      Cela permet de rendre abstrait la façon dont le thème est géré. Si on veut avoir un thème géré dans un fichier css standard, la méthode par défaut est parfaite. Elle permet de rajouter ou d'enlever une balise <i>link</i> dans le DOM.<br/>
-        Si on veut spécifier le chemin d'accès du thème, on peut utiliser la ressource 'theme' (voir le module <b>Ressource</b> pour plus d'information).<br/><br/>
-      Cependant, si on veut un thème qui fasse autre chose, on peut tout simple redéfinir les services et faire ce que l'on veut. Ceci est utile pour être compatible avec des outils comme <i>Polymer</i> et ces mixins ou bien <i>less</i>.
+      Les thèmes sont chargés et déchargés grâce à des webservices (voir le module <b>Webservice</b>). Il suffit de redéfinir ces derniers pour changer la façon dont on charge et décharge les thèmes. Cela rend abstrait ce qu'est un thème.<br/><br/>
+      Par défaut, les webservices ajoutent ou enlevent une balise <i>link</i> dans la balise <i>HEAD</i> du <i>DOM</i>. L'url du fichier sera définit via la ressource <i>theme</i> (voir le module <b>Ressource</b> pour plus d'information).
     </p>
     <dev-code>
       define(["elaiJS/webservice"], function(webservice) {

@@ -1,8 +1,8 @@
 <dom-module id="doc-ressources-fr">
   <template>
-    <elaijsapi-h4>Description</elaijsapi-h4>
+    <h2>Description</h2>
     <p>
-      Ce module permet d'utiliser un système de ressources. Une ressource est une sorte de configuration avancée. Une ressource peut est définie en fonction d'une autre ressource ou bien de paramètres externes.<br/>
+      Ce module permet d'utiliser un système de ressources. Une ressource est une configuration qui peut est définie en fonction d'une autre ressource ou bien de paramètres externes.<br/>
       Cela permet, entre autre, de configurer des chemins d'accès utilisés par <b>ElaiJS</b> afin de déterminer où sont certaines ressources comme les chemins d'accès vers les widgets, les thèmes, les plugins, ...
     </p>
     
@@ -44,7 +44,7 @@
 
     <elaijsapi-h4>Execute</elaijsapi-h4>
     <p>
-      Au lieu de demander une ressource existante, on peut utiliser une <i>ressource temporaire</i>.
+      Au lieu d'utiliser une ressource existante, on peut utiliser une <i>ressource temporaire</i>.
     </p>
     <dev-code>
       define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
@@ -59,7 +59,7 @@
 
     <elaijsapi-h4>Scope</elaijsapi-h4>
     <p>
-      Au lieu de <i>regarger</i> la configuration sur l'object <i>config.elaiJS.ressources</i>, on peut spécifier un autre source de ressources.
+      Par défaut, la définition des ressources existantes est sur l'object <i>config.elaiJS.ressources</i> mais on peut utiliser une autre définition si on le désire.
     </p>
     <dev-code>
       define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
