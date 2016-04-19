@@ -18,9 +18,8 @@ f<dom-module id="widget-navigationArea">
     
     #navigationAreaContainer {
       height: 100%;
-      color: var(--light-white-color);
-      background-color: var(--dark-black-color);
-      border-right: var(--border-size) solid var(--very-dark-black-color);
+      color: var(--white-light-color);
+      background-color: var(--black-light-color);
       position: relative;
     }
     
@@ -33,18 +32,22 @@ f<dom-module id="widget-navigationArea">
       overflow: auto;
     }
     
+    #menuContainer, #navigationFooter {
+      border-right: var(--border-size) solid var(--border-color);
+    }
+    
     #logoContainer, #navigationFooter {
       flex-shrink: 0;
     }
     
     #logoContainer {
-      border-bottom: 1px solid var(--border-menu-color);
-      background-color: #313131;
+      border-bottom: var(--border-size) solid var(--border-color);
+      background-color: var(--black-color);
       flex-basis: auto;
     }
     
     #logoContainer > div {
-      height: calc(var(--logo-height) + var(--border-size) - 1px);
+      height: calc(var(--logo-height) );
       margin: auto;
     }
     
@@ -74,7 +77,7 @@ f<dom-module id="widget-navigationArea">
       height: calc(2em - 4px);
       font-size: 1.1em;
       border: 0;
-      background-color: var(--very-dark-black-color);
+      background-color: var(--black-color);
       background-position: right center;
       color: var(--select-color);
       font-family: var(--font-family);
@@ -87,7 +90,7 @@ f<dom-module id="widget-navigationArea">
     
     #navigationFooter:hover select,
     #navigationFooter:hover::after {
-      color: var(--light-white-color);
+      color: var(--white-light-color);
     }
     
     @media screen and (max-width: 1024px) {
@@ -96,7 +99,7 @@ f<dom-module id="widget-navigationArea">
       }
       
       :host #navigationAreaContainer {
-        box-shadow: 8px 0px 20px #212121;
+        box-shadow: 8px 0px 20px var(--black-light-color);
       }
     }
     
