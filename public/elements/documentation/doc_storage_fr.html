@@ -29,8 +29,8 @@
         localStorageElaiJS.set("test2", 42);
         localStorageElaiJS.set("test3", {elaiJS: 42});
         
-        console.log(localStorageElaiJS.get("test1"));           // Output: "elaiJS"
-        console.log(localStorageElaiJS.get("test2"));           // Output: 42
+        console.log(localStorageElaiJS.get("test1"));         // Output: "elaiJS"
+        console.log(localStorageElaiJS.get("test2"));         // Output: 42
         console.log(localStorageElaiJS.get("test3").elaiJS);  // Output: 42
       });
     </dev-code>
@@ -46,7 +46,7 @@
         localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
         localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
         
-        console.log(localStorageElaiJS.get("test1"));             // Output: elaiJS
+        console.log(localStorageElaiJS.get("test1"));           // Output: elaiJS
         console.log(localStorageElaiJS.get("test1", "scope1")); // Output: elaiJS du scope1
         console.log(localStorageElaiJS.get("test1", "scope2")); // Output: elaiJS du scope2
       });

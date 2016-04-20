@@ -24,8 +24,8 @@
         // On appel le webservice
         var params = {test: 42};
         webservice.simple(params, function(result1, result2) {
-          console.log("Result1: %o", result1); //Ouput: Result1: 42
-          console.log("Result2: %o", result2); //Ouput: Result2: test
+          console.log("Result1: %o", result1); // Ouput: Result1: 42
+          console.log("Result2: %o", result2); // Ouput: Result2: test
         }, function(error) {
           console.error("Une erreur s'est produite. %o", error);
         });
@@ -200,8 +200,8 @@
         
         // On ajoute l'intercepteur apres l'éxécution du service
         webservice.addAfterInterceptor("simple", function(params, serviceParams, results, callback, errCallback) {
-          // results, c'est un tableau contenant les résultats.
-          // Dans notre cas, on a qu'un seul résultat qui est actuellement 43.
+          // Le paramètre 'result', c'est un tableau contenant les résultats.
+          // Dans notre cas, on a qu'un seul résultat qui est 43.
           console.log("Result1: " + results[0]); // Ouput: Result1: 43
           results[0] = 44;
           results.push("test");
@@ -210,8 +210,8 @@
         
         // On appel le webservice
         webservice.simple({test: 42}, function(result1, result2) {
-          console.log("Result1: %o", result1); //Ouput: Result1: 44
-          console.log("Result2: %o", result2); //Ouput: Result2: test
+          console.log("Result1: %o", result1); // Ouput: Result1: 44
+          console.log("Result2: %o", result2); // Ouput: Result2: test
         });
       });
     </dev-code>
@@ -231,7 +231,7 @@
         });
         
         webservice.simple(undefined, function(result) {
-          console.log(result); //Ouput: 42
+          console.log(result); // Ouput: 42
         });
         
         webservice.addService("simple", function(params, callback, errorCallback) {
@@ -239,7 +239,7 @@
         });
         
         webservice.simple(undefined, function(result) {
-          console.log(result); //Ouput: 43
+          console.log(result); // Ouput: 43
         });
       });
     </dev-code>

@@ -18,6 +18,10 @@
       display: none;
     }
     
+    #wrapper.hide {
+      visibility: hidden;
+    }
+    
     .cm-s-monokai.CodeMirror {
       background-color: var(--black-dark-color);
       color: var(--white-light-color);
@@ -39,7 +43,7 @@
     <div id="loader">
       {{get(lang, 'loading')}}
     </div>
-    <div id="wrapper">
+    <div id="wrapper" class="hide">
     </div>
   </template>
   
@@ -74,7 +78,7 @@
     
       function initCodeMirror(CodeMirror) {
         var value = this.$.container.innerHTML.trim();
-        value = value.replace(/      /gi, "");
+        value = value.replace(/\n      /gi, "\n");
         
         this.mirror = CodeMirror(this.$.wrapper, {
           value: value,
@@ -100,8 +104,11 @@
         var cm = this.mirror;
         cm.refresh();
         
-        if(cm.display.wrapper.offsetHeight > 0)
-          return this.$.loader.classList.add("invisible");
+        if(cm.display.wrapper.offsetHeight > 0) {
+          this.$.loader.classList.add("invisible");
+          this.$.wrapper.classList.remove("hide");
+          return;
+        }
         
         this.async(function() {
           refreshCodeMirror.call(this);
