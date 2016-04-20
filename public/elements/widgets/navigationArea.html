@@ -114,8 +114,8 @@
       <div id="menuContainer"><elaijsapi-menu></elaijsapi-menu></div>
       <div id="navigationFooter">
         <select on-change=languageSelected class="layout center horizontal">
-          <option value="fr">Français</option>
-          <option value="en">English</option>
+          <option value="fr" selected="{{isEquals('fr', selectLanguage)}}">Français</option>
+          <option value="en" selected="{{isEquals('en', selectLanguage)}}">English</option>
         </select>
         {{get(lang)}}
       </div>
@@ -128,8 +128,6 @@
       is: 'widget-navigationArea',
       behaviors: [ElaiJSBehaviors.Basic,
                   ElaiJSBehaviors.Navigator],
-      properties: {
-      },
       languageSelected: function(event) {
         var elemSelect = event.target;
         var elemSelectedOptions = elemSelect.options[elemSelect.selectedIndex];
@@ -137,6 +135,9 @@
 		    
         if(value !== this.lang.getLanguage())
           this.fire("languageSelected", value);
+      },
+      isEquals: function(obj1, obj2) {
+        return obj1 === obj2;
       }
     });
     });

@@ -7,6 +7,8 @@
       'widgets/download',
       'widgets/documentation',
       'plugins/i18nPolymerWidget',
+      'elaiJSAPI/languageManager',
+      'elaiJSAPI/navigationManager',
       'elaiJSApiMain'
     ],
     "paths": {
