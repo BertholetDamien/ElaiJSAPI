@@ -101,18 +101,17 @@
       }
       
       function refreshCodeMirror() {
-        var cm = this.mirror;
-        cm.refresh();
+        this.mirror.refresh();
         
-        if(cm.display.wrapper.offsetHeight > 0) {
+        if(this.mirror.display.wrapper.offsetHeight > 0) {
           this.$.loader.classList.add("invisible");
           this.$.wrapper.classList.remove("hide");
-          return;
         }
-        
-        this.async(function() {
-          refreshCodeMirror.call(this);
-        }, 100);
+        else {
+          this.async(function() {
+            refreshCodeMirror.call(this);
+          }, 100);
+        }
       }
     });
   </script>
