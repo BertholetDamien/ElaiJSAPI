@@ -6,7 +6,7 @@
     
     <elaijsapi-h4>Rendre un object évènementiable</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/binder"], function(binder) {
+      require(["elaiJS/binder"], function(binder) {
         var obj = {};
         // On ajoute les fonctions d'évènements.
         binder.addFunctions(obj);
@@ -27,7 +27,7 @@
       Il existe également un object <i>Global</i> qui permet d'écouter et de déclencher des évènements que tout le monde peut écouter.
     </p>
     <dev-code>
-      define(["elaiJS/binder"], function(binder) {
+      require(["elaiJS/binder"], function(binder) {
         // On bind l'évènement à une fonction.
         binder.bindGlobal("globalEvent", function(event) {
           console.log("Je suis un global Event %o", event);

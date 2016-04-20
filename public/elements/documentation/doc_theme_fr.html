@@ -9,7 +9,7 @@
     
     <elaijsapi-h4>Changer de thèmes</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/theme"], function(themeManager) {
+      require(["elaiJS/theme"], function(themeManager) {
         themeManager.setTheme("theme1");
         console.log(themeManager.getTheme()); // Output: theme1
         
@@ -20,7 +20,7 @@
     
     <elaijsapi-h4>Callback et erreur</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/theme"], function(themeManager) {
+      require(["elaiJS/theme"], function(themeManager) {
         function themeLoaded(data) {
           console.log("Tout s'est bien passé, le thème est chargé.");
           console.log("Le theme a changé de " + data.oldTheme + " à " + data.newTheme);
@@ -36,7 +36,7 @@
     
     <elaijsapi-h4>Ecouter un changement de thèmes</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/theme"], function(themeManager) {
+      require(["elaiJS/theme"], function(themeManager) {
         themeManager.bind(themeManager.EVENT.themeChanged, function(data) {
           var data = event.data;
           console.log("Le theme a changé de " + data.oldTheme + " à " + data.newTheme);
@@ -56,7 +56,7 @@
       Par défaut, les webservices ajoutent ou enlevent une balise <i>link</i> dans la balise <i>HEAD</i> du <i>DOM</i>. L'url du fichier sera définit via la ressource <i>theme</i> (voir le module <elaijs-link page="documentation" name="ressources"><i><b>Ressource</b></i></elaijs-link> pour plus d'information).
     </p>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         webservice.loadTheme(function(params, callback, errCallback) {
           // Do your stuff here
           callback();

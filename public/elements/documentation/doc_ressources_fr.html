@@ -8,7 +8,7 @@
     
     <elaijsapi-h4>Configurer une ressource</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
+      require(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
         config.elaiJS.ressources.newPath = "paths/";
         console.log(ressources.get("newPath")); // Output: paths/
       });
@@ -16,7 +16,7 @@
     
     <elaijsapi-h4>Utiliser des paramètres</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
+      require(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
         config.elaiJS.ressources.newPath = "paths/{{path1}}/{{path2}}";
         
         var params = {
@@ -29,7 +29,7 @@
     
     <elaijsapi-h4>Utiliser une valeur relative</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
+      require(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
         config.elaiJS.ressources.paths = "paths";
         config.elaiJS.ressources.path = "{{paths}}/path/{{name}}.{{ext}}";
         
@@ -47,7 +47,7 @@
       Au lieu d'utiliser une ressource existante, on peut utiliser une <i>ressource temporaire</i>.
     </p>
     <dev-code>
-      define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
+      require(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
         config.elaiJS.ressources.abc = "abc";
         config.elaiJS.ressources.def = "def";
         
@@ -62,7 +62,7 @@
       Par défaut, la définition des ressources existantes est sur l'object <i>config.elaiJS.ressources</i> mais on peut utiliser une autre définition si on le désire.
     </p>
     <dev-code>
-      define(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
+      require(["elaiJS/ressources", "elaiJS/configuration"], function(ressources, config) {
         var customRessources = {
           "custom1": "42",
           "custom2": "{{custom1}} - {{neg}}",

@@ -24,7 +24,7 @@
       Cela permet de stocker des objects, des strings, des booleans ou des entiers de façon complètement transparente.
     </p>
      <dev-code>
-      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+      require(["elaiJS/localStorage"], function(localStorageElaiJS) {
         localStorageElaiJS.set("test1", "elaiJS");
         localStorageElaiJS.set("test2", 42);
         localStorageElaiJS.set("test3", {elaiJS: 42});
@@ -41,7 +41,7 @@
       Si aucun <i>chemin</i> n'est définit, c'est la configuration "config.elaiJS.storagePath" qui sera utilisé. Cette configuration a par défaut la valeur de "location.pathname". Ex. Dans le cas de <i>monsite.com/chemin</i>, la valeur par défaut sera <i>chemin</i>.
     </p>
      <dev-code>
-      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+      require(["elaiJS/localStorage"], function(localStorageElaiJS) {
         localStorageElaiJS.set("test1", "elaiJS");
         localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
         localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
@@ -71,7 +71,7 @@
       </li>
     </ul>
     <dev-code>
-      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+      require(["elaiJS/localStorage"], function(localStorageElaiJS) {
         localStorageElaiJS.set("test1", "elaiJS");
         localStorageElaiJS.set("test1", "elaiJS du scope1", "scope1");
         localStorageElaiJS.set("test1", "elaiJS du scope2", "scope2");
@@ -114,7 +114,7 @@
       </li>
     </ul>
     <dev-code>
-      define(["elaiJS/localStorage"], function(localStorageElaiJS) {
+      require(["elaiJS/localStorage"], function(localStorageElaiJS) {
         // Comme pour chaque fonction, si aucun scope n'est specifie, le scope par defaut sera utilise.
         var scope;
         

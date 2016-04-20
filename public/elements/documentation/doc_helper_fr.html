@@ -7,7 +7,7 @@
     
     <elaijsapi-h4>Ajouter ou modifier une foncion utilitaire</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/helper"], function(helper) {
+      require(["elaiJS/helper"], function(helper) {
         helper.myFunction = function(obj) {
           return "Hi, you are a '" + (typeof obj) + "'";
         };

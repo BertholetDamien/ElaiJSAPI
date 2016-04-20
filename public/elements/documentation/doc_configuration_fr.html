@@ -9,7 +9,7 @@
     
     <elaijsapi-h4>Lecture et écriture</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/configuration"], function(config) {
+      require(["elaiJS/configuration"], function(config) {
         // L'object config.elaiJS contient toutes les configurations d'ElaiJS.
         console.log(config.elaiJS);
         
@@ -26,7 +26,7 @@
       Pour une configuration, il est aussi utile de pouvoir redéfinir un object tout en gardant les valeurs déjà définies.
     </p>
     <dev-code>
-      define(["elaiJS/configuration"], function(config) {
+      require(["elaiJS/configuration"], function(config) {
         config.obj = {
           life: "sun",
           superValue: 42

@@ -12,7 +12,7 @@
     
     <elaijsapi-h4>Créer un WebService</elaijsapi-h4>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         // Creation du webservice
         webservice.addService("simple", function(params, callback, errorCallback) {
           console.log("ParamsTest: " + params.test); // Ouput: ParamsTest: 42
@@ -41,7 +41,7 @@
     </elaijsapi-note>
     
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         var count = 0;
         // Creation du webservice qui utilise le cache
         webservice.addService("simple", function(params, callback, errorCallback) {
@@ -86,7 +86,7 @@
       </li>
     </ul>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         var count = 0;
         // Creation du webservice qui utilise le cache
         webservice.addService("simple", function(params, callback, errorCallback) {
@@ -117,7 +117,7 @@
       Quand un service utilisant le cache est en cours d'éxécution, il est mit dans une liste. Si ce même service est appelé avec les même paramètres, il sera mis en attente de l'éxécution du premier appel. Ainsi, le service ne sera exécuté qu'une seule fois.
     </p>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         var count = 0;
         // Creation du webservice qui utilise le cache
         webservice.addService("simple", function(params, callback, errorCallback) {
@@ -147,7 +147,7 @@
       Cela permet, par exemple, de faire du profiling sur le temps d'exécution ou le nombre d'exécution d'un service.
     </p>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         webservice.addService("simple", function(params, callback, errorCallback) {
           callback(42);
         });
@@ -188,7 +188,7 @@
     </elaijsapi-note>
     
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         webservice.addService("simple", function(params, callback, errorCallback) {
           callback(params.test);
         });
@@ -225,7 +225,7 @@
       Cela aura pour conséquence de supprimer le cache de ce service ainsi que ces intercepteurs et listeners.
     </p>
     <dev-code>
-      define(["elaiJS/webservice"], function(webservice) {
+      require(["elaiJS/webservice"], function(webservice) {
         webservice.addService("simple", function(params, callback, errorCallback) {
           callback(42);
         });
