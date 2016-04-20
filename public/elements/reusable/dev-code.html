@@ -1,20 +1,112 @@
+<link href="../../bower_components/codemirror/lib/codemirror.css" rel="stylesheet">
+<link href="../../bower_components/codemirror/theme/monokai.css" rel="stylesheet">
 <dom-module id="dev-code">
+  <style>
+    #container {
+      display: none;
+    }
+    
+    #loader {
+      font-size: 2em;
+      font-weight: bold;
+      padding: 1.5em 0;
+      text-align: center;
+      color: #9FA8DA;
+    }
+    
+    #loader.invisible {
+      display: none;
+    }
+    
+    .cm-s-monokai.CodeMirror {
+      background-color: var(--black-dark-color);
+      color: var(--white-light-color);
+      width: 100%;
+      height: auto;
+      position: inherit;
+      z-index: 1;
+    }
+    
+    .cm-s-monokai.CodeMirror .CodeMirror-gutters {
+      background-color: var(--black-dark-color);
+    }
+  </style>
+    
   <template>
-    <div id="code">
-      <code>
-        <content></content>
-      </code>
+    <div id="container">
+      <content></content>
+    </div>
+    <div id="loader">
+      {{get(lang, 'loading')}}
+    </div>
+    <div id="wrapper">
     </div>
   </template>
   
   <script>
     ElaiJSBehaviors.wait(function() {
-    Polymer({
-      is: 'dev-code',
-      attached: function() {
-        
+      function loadCodeMirror(callback, scope) {
+        require(["elaiJS/configuration", "elaiJS/ressources"], function(config, res) {
+          var codemirrorPath = "../../lib/codemirror";
+          config.elaiJS.require.paths[codemirrorPath] = res.get("cmLib");
+          
+          require([codemirrorPath], function(CodeMirror) {
+            var jsMode = res.get("cmMode", {name: "javascript"});
+            require([jsMode], function() {
+              if(callback)
+                callback.call(scope, CodeMirror);
+            });
+          });
+        });
       }
-    });
+      
+      Polymer({
+        is: 'dev-code',
+        behaviors: [ElaiJSBehaviors.Basic],
+        ready: function() {
+          loadCodeMirror(initCodeMirror, this);
+        },
+        attached: function() {
+          if(this.mirror)
+            refreshCodeMirror.call(this);
+        }
+      });
+    
+      function initCodeMirror(CodeMirror) {
+        var value = this.$.container.innerHTML.trim();
+        value = value.replace(/      /gi, "");
+        
+        this.mirror = CodeMirror(this.$.wrapper, {
+          value: value,
+          mode: "javascript",
+          theme: "monokai",
+          tabSize: 2,
+          lineWrapping: true,
+          lineNumbers: true
+        });
+        
+        addStyleClass.call(this, this.mirror.display.wrapper);
+        addStyleClass.call(this, this.mirror.display.gutters);
+        
+        refreshCodeMirror.call(this);
+      }
+      
+      function addStyleClass(elemDiv) {
+        elemDiv.classList.add(this.tagName.toLowerCase());
+        elemDiv.classList.add("style-scope");
+      }
+      
+      function refreshCodeMirror() {
+        var cm = this.mirror;
+        cm.refresh();
+        
+        if(cm.display.wrapper.offsetHeight > 0)
+          return this.$.loader.classList.add("invisible");
+        
+        this.async(function() {
+          refreshCodeMirror.call(this);
+        }, 100);
+      }
     });
   </script>
 </dom-module>
