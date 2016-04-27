@@ -1,9 +1,12 @@
-define(["elaiJS/widget", "elaiJSAPI/navigationManager", "elaiJSAPI/languageManager"],
-        function(widgetManager, navigationManager, languageManager) {
+define(["elaiJS/widget", "elaiJSAPI/navigationManager",
+        "elaiJSAPI/languageManager", "elaiJSAPI/elaiJSAPIServices"],
+        function( widgetManager, navigationManager, languageManager,
+                  elaiJSAPIServices) {
   
   function start() {
     navigationManager.initialize();
     languageManager.initialize();
+    elaiJSAPIServices.initialize();
     widgetManager.createAndRender("body", "body");
   }
   

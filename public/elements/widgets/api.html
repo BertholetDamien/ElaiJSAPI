@@ -1,0 +1,34 @@
+<dom-module id="widget-api">
+  <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
+  <style>
+  </style>
+    
+  <template>
+    {{get(lang, data.descriptionKey)}}
+    <template is="dom-repeat" items="{{data.methods}}">
+      {{item.name}}
+      {{get(lang, item.descriptionKey)}}
+      {{get(lang, item.returns.descriptionKey)}}
+      
+      <template is="dom-repeat" items="{{item.parameters}}">
+        {{get(lang, item.descriptionKey)}}
+      </template>
+    </template>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'widget-api',
+      TAG: "api",
+      behaviors: [ElaiJSBehaviors.Basic],
+      properties: {
+        data: Object
+      },
+      ready: function() {
+        
+      }
+    });
+    });
+  </script>
+</dom-module>

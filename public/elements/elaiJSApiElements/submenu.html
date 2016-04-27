@@ -131,9 +131,11 @@
         
         if(this.hasSubMenus) {
           toggleActive(this.querySelector(".subItems .active"), false);
-          toggleActive(this.getSubLink(this.pageInfo.name), true);
-          if(isPage)
+          
+          if(isPage) {
+            toggleActive(this.getSubLink(this.pageInfo.name), true);
             this.showSubMenus();
+          }
         }
         
         toggleActive(elemLink, isPage);

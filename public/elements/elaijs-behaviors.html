@@ -55,6 +55,7 @@
         this.fire('detached', this);
       },
       get: function(obj, key, params, language) {
+        console.log(key);
         if(!obj || key === undefined)
           return "";
         

@@ -17,7 +17,8 @@
       "bower" : "bower_components",
       "codemirror": "{{bower}}/codemirror",
       "cmLib": "{{codemirror}}/lib/codemirror.js",
-      "cmMode": "{{codemirror}}/mode/{{name}}/{{name}}.js"
+      "cmMode": "{{codemirror}}/mode/{{name}}/{{name}}.js",
+      "api": "{{ressources}}/api/{{name}}.json"
     }
   },
   "app": {
@@ -33,6 +34,15 @@
           "overview", "requireElaiJS", "configuration", "event", "webservice",
           "widget", "plugin", "renderer", "navigation", "i18n", "ressources", "mode",
           "storage", "theme", "helper", "debugManager"
+        ]
+      },
+      {
+        "key": "api",
+        "icon": "description",
+        "subMenus": [
+          "event", "webservice", "widget", "plugin", "primaryWidget", "navigation",
+          "language", "localisation", "ressources", "mode", "storage", "theme",
+          "helper"
         ]
       },
       {
