@@ -1,0 +1,42 @@
+<dom-module id="elaijsapi-seeapi">
+  <style>
+    :host div {
+      margin-top: 0.6em;
+      margin-bottom: 0.2em;
+      
+      color: var(--black-dark-color);
+      font-weight: bold;
+      font-style: italic;
+    }
+    
+    :host div:hover {
+      text-decoration: underline;
+    }
+    
+  </style>
+
+  <template>
+    <div>
+      <elaijs-link href="[[href]]">{{get(lang, 'see_api')}}</elaijs-link>
+    </div>
+  </template>
+  
+  <script>
+    ElaiJSBehaviors.wait(function() {
+    Polymer({
+      is: 'elaijsapi-seeapi',
+      behaviors: [
+        ElaiJSBehaviors.Basic,
+        ElaiJSBehaviors.Navigator
+      ],
+      properties: {
+        name: String
+      },
+      ready: function() {
+        var name = this.name || this.pageInfo.name;
+        this.href = {page: "api", name: name};
+      }
+    });
+    });
+  </script>
+</dom-module>

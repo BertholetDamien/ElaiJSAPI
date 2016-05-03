@@ -1,19 +1,75 @@
 <dom-module id="widget-api">
   <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
   <style>
+    .methods {
+      margin: 0.1em;
+      padding: 1em 1.5em;
+      background-color: #EEEEEE;
+    }
+    
+    .details {
+      margin-left: 28%;
+      margin-bottom: 3em;
+    }
+    
+    .details .description {
+      margin: 0.5em 0;
+    }
+    
+    .label {
+      flex-shrink: 0;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-right: 0.5em;
+    }
+    
+    .label::after {
+      content: ' - ';
+    }
+    
+    .info {
+      @apply(--layout-horizontal);
+    }
   </style>
     
   <template>
-    {{get(lang, data.descriptionKey)}}
-    <template is="dom-repeat" items="{{data.methods}}">
-      {{item.name}}
-      {{get(lang, item.descriptionKey)}}
-      {{get(lang, item.returns.descriptionKey)}}
-      
-      <template is="dom-repeat" items="{{item.parameters}}">
-        {{get(lang, item.descriptionKey)}}
-      </template>
-    </template>
+    <div class="description">
+      {{get(lang, data.descriptionKey)}}
+    </div>
+    
+    <div class="methodsContainer">
+      <elaijsapi-h4>
+        {{get(lang, 'methods')}}
+      </elaijsapi-h4>
+      <div class="methods">
+        <template is="dom-repeat" items="{{data.methods}}">
+          <div class="method">
+            <div class="signature">
+              <b>{{item.name}}</b>[[getSignatureDisplay(item)]]
+            </div>
+            <div class="details">
+              <div class="description">
+                {{get(lang, item.descriptionKey)}}
+              </div>
+              
+              <template is="dom-repeat" items="{{item.parameters}}">
+                <div class="parameter info">
+                  <div class="label">{{item.name}}</div>
+                  {{get(lang, item.descriptionKey)}}
+                </div>
+              </template>
+              
+              <template is="dom-if" if="[[item.returns]]">
+                <div class="return info">
+                  <div class="label">{{get(lang, 'returns')}}</div>
+                  {{get(lang, item.returns.descriptionKey)}}
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
   </template>
   
   <script>
@@ -27,6 +83,25 @@
       },
       ready: function() {
         
+      },
+      getSignatureDisplay: function(method) {
+        var signature = "(";
+        
+        for(var i in method.parameters) {
+          var parameter = method.parameters[i];
+          if(i != "0")
+            signature += ", ";
+          signature += parameter.type + " " + parameter.name;
+          if(parameter.required)
+            signature += "*";
+        }
+        
+        signature += ")";
+         
+        if(method.returns)
+          signature += " ➙ " + method.returns.type;
+        
+        return signature;
       }
     });
     });

@@ -12,10 +12,10 @@ define(["elaiJS/webservice"], function(webservice) {
 	  this.processRowData = function() {
 	    var data = this.rowData;
 	    
-	    data.descriptionKey = data.name;
+	    data.descriptionKey = data.name.toLowerCase();
 	    
 	    for(var i in data.methods)
-	      processRowMethod(data.methods[i], data.name);
+	      processRowMethod(data.methods[i], data.descriptionKey);
 	    
 	    return data;
 	  };
@@ -29,12 +29,13 @@ define(["elaiJS/webservice"], function(webservice) {
         parameter.descriptionKey = methodKey + "_" + parameter.name;
       }
       
-      if(method.returns)
+      if(method.returns) {
+        method.returns = {type: method.returns};
         method.returns.descriptionKey = methodKey + "_returns";
+      }
 	  }
 	  
 	  this.afterSetData = function() {
-	    console.log(this.data);
 	    this.viewData = this.data;
 	  };
 	};
