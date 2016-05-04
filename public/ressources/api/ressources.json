@@ -1,0 +1,142 @@
+{
+  "name": "Helper",
+  "methods": [
+    {
+      "name": "extractGetParams",
+      "returns": "Object"
+    },
+    {
+      "name": "extractParams",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "trim",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false
+        }
+      ]
+    },
+    {
+      "name": "extractArray",
+      "returns": "Array",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "trim",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": false
+        }
+      ]
+    },
+    {
+      "name": "isFunction",
+      "returns": "boolean",
+      "parameters": [
+        {
+          "name": "object",
+          "type": "var",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "isObject",
+      "returns": "boolean",
+      "parameters": [
+        {
+          "name": "object",
+          "type": "var",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "isEmail",
+      "returns": "boolean",
+      "parameters": [
+        {
+          "name": "email",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "getElaiJSAttribute",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "clone",
+      "returns": "var",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "var",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "parseJSON",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "capitalize",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "returns": "boolean",
+      "parameters": [
+        {
+          "name": "obj1",
+          "type": "var",
+          "required": true
+        },
+        {
+          "name": "obj2",
+          "type": "var",
+          "required": true
+        },
+        {
+          "name": "strict",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": true
+        }
+      ]
+    }
+  ]
+}

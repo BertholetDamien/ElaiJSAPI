@@ -1,0 +1,172 @@
+{
+  "name": "WebService",
+  "methods": [
+    {
+      "name": "addService",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "executeFonction",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "defaultServiceParams",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "{useCache: false, searchInCache: true}"
+        }
+      ]
+    },
+    {
+      "name": "setDefaultServiceParams",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "defaultServiceParams",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "{useCache: false, searchInCache: true}"
+        }
+      ]
+    },
+    {
+      "name": "addBeforeListener",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "addAfterListener",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "removeBeforeListener",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "removeAfterListener",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "addBeforeInterceptor",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "addAfterInterceptor",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "removeBeforeInterceptor",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "removeAfterInterceptor",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    }
+  ]
+}
