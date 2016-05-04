@@ -1,0 +1,285 @@
+{
+  "name": "Event",
+  "methods": [
+    {
+      "name": "bindGlobal",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        },
+        {
+          "name": "bindOne",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false"
+        }
+      ]
+    },
+    {
+      "name": "bindOneGlobal",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        }
+      ]
+    },
+    {
+      "name": "unbindGlobal",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "unbindAllGlobal"
+    },
+    {
+      "name": "fireGlobal",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String|Object",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "Object",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "buildGlobalFireCallBack",
+      "returns": "Function",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String|Object",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        },
+        {
+          "name": "data",
+          "type": "Object",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "bindOne",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        }
+      ]
+    },
+    {
+      "name": "bind",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        },
+        {
+          "name": "bindOne",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false"
+        }
+      ]
+    },
+    {
+      "name": "unbind",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "unbindAll",
+      "returns": "Object"
+    },
+    {
+      "name": "fire",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String|Object",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "Object",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "buildEvent",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "String|Object",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "Object",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "buildFireCallBack",
+      "returns": "Function",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "Object",
+          "required": true
+        },
+        {
+          "name": "event",
+          "type": "String|Object",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        },
+        {
+          "name": "data",
+          "type": "Object",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "addBindFunctions",
+      "parameters": [
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "addFunctions",
+      "parameters": [
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "addAllFunctions",
+      "parameters": [
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

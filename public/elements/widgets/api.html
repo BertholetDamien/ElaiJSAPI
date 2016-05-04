@@ -1,19 +1,28 @@
 <dom-module id="widget-api">
   <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
   <style>
-    .methods {
+    .elems {
       margin: 0.1em;
       padding: 1em 1.5em;
       background-color: #EEEEEE;
+      border-radius: 2px;
+    }
+    
+    .elem {
+      margin-bottom: 2em;
     }
     
     .details {
       margin-left: 28%;
-      margin-bottom: 3em;
     }
     
     .details .description {
       margin: 0.5em 0;
+    }
+    
+    .signature:hover {
+      cursor: pointer;
+      color: #7986cb;
     }
     
     .label {
@@ -41,31 +50,39 @@
       <elaijsapi-h4>
         {{get(lang, 'methods')}}
       </elaijsapi-h4>
-      <div class="methods">
-        <template is="dom-repeat" items="{{data.methods}}">
-          <div class="method">
-            <div class="signature">
+      <div class="methods elems">
+        <template is="dom-repeat" items="[[data.methods]]">
+          <div class="method elem">
+            <div class="signature" on-click=toggleDetails>
               <b>{{item.name}}</b>[[getSignatureDisplay(item)]]
             </div>
-            <div class="details">
-              <div class="description">
-                {{get(lang, item.descriptionKey)}}
-              </div>
-              
-              <template is="dom-repeat" items="{{item.parameters}}">
-                <div class="parameter info">
-                  <div class="label">{{item.name}}</div>
+            <iron-collapse class="detailsCollapse iron-collapse-closed" vertical=true>
+              <div class="details">
+                <div class="description">
                   {{get(lang, item.descriptionKey)}}
                 </div>
-              </template>
-              
-              <template is="dom-if" if="[[item.returns]]">
-                <div class="return info">
-                  <div class="label">{{get(lang, 'returns')}}</div>
-                  {{get(lang, item.returns.descriptionKey)}}
-                </div>
-              </template>
-            </div>
+                
+                <template is="dom-repeat" items="[[item.parameters]]">
+                  <div class="parameter info">
+                    <div class="label">[[item.name]]</div>
+                    <div>
+                      {{get(lang, item.descriptionKey)}}
+                      <template is="dom-if" if="[[hasDefaultValue(item)]]">
+                        <br/>
+                        <b>{{get(lang, 'defaultValue')}}</b> [[item.defaultValue]]
+                      </template>
+                    </div>
+                  </div>
+                </template>
+                
+                <template is="dom-if" if="[[item.returns]]">
+                  <div class="return info">
+                    <div class="label">{{get(lang, 'returns')}}</div>
+                    {{get(lang, item.returns.descriptionKey)}}
+                  </div>
+                </template>
+              </div>
+            </iron-collapse>
           </div>
         </template>
       </div>
@@ -83,6 +100,14 @@
       },
       ready: function() {
         
+      },
+      toggleDetails: function(event) {
+        var elem = event.target
+        while(!elem.classList.contains("elem"))
+          elem = elem.parentElement;
+        
+        var collapser = elem.getElementsByClassName("detailsCollapse")[0];
+        collapser.toggle();
       },
       getSignatureDisplay: function(method) {
         var signature = "(";
@@ -102,6 +127,9 @@
           signature += " ➙ " + method.returns.type;
         
         return signature;
+      },
+      hasDefaultValue: function(item) {
+        return item.defaultValue !== undefined;
       }
     });
     });
