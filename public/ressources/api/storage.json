@@ -1,142 +1,269 @@
 {
-  "name": "Helper",
+  "name": "Storage",
   "methods": [
     {
-      "name": "extractGetParams",
-      "returns": "Object"
-    },
-    {
-      "name": "extractParams",
-      "returns": "Object",
-      "parameters": [
-        {
-          "name": "string",
-          "type": "String",
-          "required": true
-        },
-        {
-          "name": "trim",
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false
-        }
-      ]
-    },
-    {
-      "name": "extractArray",
-      "returns": "Array",
-      "parameters": [
-        {
-          "name": "string",
-          "type": "String",
-          "required": true
-        },
-        {
-          "name": "trim",
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false
-        }
-      ]
-    },
-    {
-      "name": "isFunction",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "object",
-          "type": "var",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "isObject",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "object",
-          "type": "var",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "isEmail",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "email",
-          "type": "String",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "getElaiJSAttribute",
-      "returns": "String",
+      "name": "get",
+      "returns": "var",
       "parameters": [
         {
           "name": "name",
           "type": "String",
           "required": true
-        }
-      ]
-    },
-    {
-      "name": "clone",
-      "returns": "var",
-      "parameters": [
+        },
         {
-          "name": "obj",
-          "type": "var",
-          "required": true
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
         }
       ]
     },
     {
-      "name": "parseJSON",
+      "name": "set",
       "returns": "Object",
       "parameters": [
         {
-          "name": "string",
+          "name": "name",
           "type": "String",
           "required": true
-        }
-      ]
-    },
-    {
-      "name": "capitalize",
-      "returns": "String",
-      "parameters": [
+        },
         {
-          "name": "string",
-          "type": "String",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "equals",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "obj1",
+          "name": "value",
           "type": "var",
           "required": true
         },
         {
-          "name": "obj2",
-          "type": "var",
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        }
+      ]
+    },
+    {
+      "name": "remove",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
           "required": true
         },
         {
-          "name": "strict",
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        }
+      ]
+    },
+    {
+      "name": "clearAll",
+      "returns": "Object"
+    },
+    {
+      "name": "clear",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        }
+      ]
+    },
+    {
+      "name": "bindCurrentTab",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        },
+        {
+          "name": "bindOne",
           "type": "boolean",
           "required": false,
-          "defaultValue": true
+          "defaultValue": "false"
         }
       ]
+    },
+    {
+      "name": "bindOneCurrentTab",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        }
+      ]
+    },
+    {
+      "name": "unbindCurrentTab",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        }
+      ]
+    },
+    {
+      "name": "bind",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        },
+        {
+          "name": "bindOne",
+          "type": "boolean",
+          "required": false,
+          "defaultValue": "false"
+        }
+      ]
+    },
+    {
+      "name": "bindOne",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "scope",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "this"
+        }
+      ]
+    },
+    {
+      "name": "unbind",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": false
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.storagePath"
+        }
+      ]
+    },
+    {
+      "name": "unbindAll",
+      "returns": "Object"
     }
   ]
 }

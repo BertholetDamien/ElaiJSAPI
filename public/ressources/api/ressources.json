@@ -1,140 +1,47 @@
 {
-  "name": "Helper",
+  "name": "Ressources",
   "methods": [
     {
-      "name": "extractGetParams",
-      "returns": "Object"
-    },
-    {
-      "name": "extractParams",
-      "returns": "Object",
-      "parameters": [
-        {
-          "name": "string",
-          "type": "String",
-          "required": true
-        },
-        {
-          "name": "trim",
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false
-        }
-      ]
-    },
-    {
-      "name": "extractArray",
-      "returns": "Array",
-      "parameters": [
-        {
-          "name": "string",
-          "type": "String",
-          "required": true
-        },
-        {
-          "name": "trim",
-          "type": "boolean",
-          "required": false,
-          "defaultValue": false
-        }
-      ]
-    },
-    {
-      "name": "isFunction",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "object",
-          "type": "var",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "isObject",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "object",
-          "type": "var",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "isEmail",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "email",
-          "type": "String",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "getElaiJSAttribute",
+      "name": "get",
       "returns": "String",
       "parameters": [
         {
           "name": "name",
           "type": "String",
           "required": true
-        }
-      ]
-    },
-    {
-      "name": "clone",
-      "returns": "var",
-      "parameters": [
+        },
         {
-          "name": "obj",
-          "type": "var",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "parseJSON",
-      "returns": "Object",
-      "parameters": [
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
         {
-          "name": "string",
-          "type": "String",
-          "required": true
+          "name": "ressourcesList",
+          "type": "Object",
+          "required": false,
+          "defaultValue": "Configuration: config.elaiJS.ressources"
         }
       ]
     },
     {
-      "name": "capitalize",
+      "name": "execute",
       "returns": "String",
       "parameters": [
         {
-          "name": "string",
+          "name": "value",
           "type": "String",
           "required": true
-        }
-      ]
-    },
-    {
-      "name": "equals",
-      "returns": "boolean",
-      "parameters": [
-        {
-          "name": "obj1",
-          "type": "var",
-          "required": true
         },
         {
-          "name": "obj2",
-          "type": "var",
-          "required": true
+          "name": "params",
+          "type": "Object",
+          "required": false
         },
         {
-          "name": "strict",
-          "type": "boolean",
+          "name": "ressourcesList",
+          "type": "Object",
           "required": false,
-          "defaultValue": true
+          "defaultValue": "Configuration: config.elaiJS.ressources"
         }
       ]
     }
