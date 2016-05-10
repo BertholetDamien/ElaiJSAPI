@@ -1,6 +1,19 @@
 <dom-module id="widget-api">
   <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
   <style>
+    .presentation {
+      margin: 1em 0 1.5em 0;
+    
+      margin-top: 0.4em;
+      color: var(--black-dark-color);
+      font-weight: bold;
+      font-style: italic;
+    }
+    
+    .presentation:hover {
+      text-decoration: underline;
+    }
+    
     .elems {
       margin: 0.1em;
       padding: 1em 1.5em;
@@ -13,7 +26,7 @@
     }
     
     .details {
-      margin-left: 28%;
+      margin-left: 20%;
     }
     
     .details .description {
@@ -38,12 +51,14 @@
     
     .info {
       @apply(--layout-horizontal);
+      align-items: baseline;
     }
   </style>
     
   <template>
-    <div class="description">
-      {{get(lang, data.descriptionKey)}}
+    
+    <div class="presentation">
+      <elaijs-link href="[[docHref]]">{{get(lang, 'see_documentation')}}</elaijs-link>
     </div>
     
     <div class="methodsContainer">
@@ -98,8 +113,9 @@
       properties: {
         data: Object
       },
-      ready: function() {
-        
+      attached: function() {
+        var name = this.data.documentationName || this.data.name.toLowerCase();
+        this.docHref = {page: "documentation", name: name};
       },
       toggleDetails: function(event) {
         var elem = event.target
