@@ -3,7 +3,7 @@ define([  "elaiJS/webservice", "elaiJS/ressources"],
 	'use strict';
 
 	function initialize() {
-    webservice.addService("loadAPI", loadAPI, true);
+    webservice.addService("loadAPI", loadAPI, {useCache: true});
 	}
 	
 	function loadAPI(name, callback, errCallback) {
