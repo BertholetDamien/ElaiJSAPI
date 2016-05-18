@@ -84,6 +84,14 @@
           Ce paramètre détermine si l'on va chercher dans le cache s'il y a un match avec notre appel.<br/>
           Cela permet de forcer l'éxécution du service même si le résultat est déjà dans le cache. La valeur du cache sera alors remplacé par la nouvelle.
       </li>
+      <br/>
+      <li>
+        <b>Name</b>: scope<br/>
+        <b>Type</b>: Object<br/>
+        <b>Valeur par défaut</b>: L'object représentant le service en cours d'éxécution<br/>
+        <b>Description</b>: <br/>
+          Ce paramètre détermine le scope qui sera utilisé pour appeler les fonctions de callbacks, de succès ou d'erreur.<br/>
+      </li>
     </ul>
     <dev-code>
       require(["elaiJS/webservice"], function(webservice) {

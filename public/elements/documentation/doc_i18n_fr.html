@@ -1,93 +1,203 @@
 <dom-module id="doc-i18n-fr">
   <template>
+    <h2>Description</h2>
     <p>
-      i18n - fr.
+      L'internationalisation comprend deux modules différents: la <i>Langue</i> et la <i>localisation</i>. Ces deux modules fonctionnent avec la même logique mais ont des rôles différents.
+      <br/>
+      <br/>
+      Evidemment, le module de <i>Langue</i> détermine la langue de l'application et permet d'afficher du texte internationalisé.<br/>
+      La <i>Langue</i> est représenté par le code des langues tel que 'en', 'fr', 'es', ...
+      <br/>
+      <br/>
+      Le module de <i>Localisation</i> s'occupe de tout ce qui correspond à l'endroit où vous vous trouvez. Exemple: Le format de la date.<br/>
+      La <i>Localisation</i> est représenté par le code des langues-pays tel que 'en-US', 'en-CA', 'fr-FR', ...
+    </p>
+    
+    <elaijsapi-h4>Configuration de l'internationalisation</elaijsapi-h4>
+    <p>
+      Les configurations pour l'internationalisation sont au nombre de trois. Elles doivent  être définis dans le fichier de configuration afin qu'elles soient présentes avant le chargement d'<b>ElaiJS</b>.
+      <br/><br/>
     </p>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
+      1. La valeur par défaut que vous voulez donner à vos deux modules.
+    </p>
+    <dev-code>
+      {
+        "elaiJS": {
+          "defaultLanguage":      "en",
+          "defaultLocalisation":  "en-US"
+        }
+      });
+    </dev-code>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
+      2. L'<i>Auto Finding</i> va utiliser la langue du <i>navigateur</i> actuelle grâce au variable suivantes: window.navigator.userLanguage || window.navigator.language<br/>
+    </p>
+    <dev-code>
+      {
+        "elaiJS": {
+          "autoFindLocalisation": true || false - Default: true,
+          "autoFindLanguage":     true || false - Default: true
+        }
+      });
+    </dev-code>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
+      3. Détermine si on passe l'initialisation du module. L'initialisation charge la <i>Langue</i> et la <i>Localisation</i> par défaut ainsi que celle déterminée par l'<i>Auto Finding</i>.<br/>
+        Cela permet, par exemple, de déterminer de façon dynamique les valeurs des configurations ci-haut et d'initialiser le module soit même.<br/>
+        On peut également utiliser cette configuration afin de ne pas utiliser un des deux modules, il suffit alors de ne pas l'initaliser.
+    </p>
+    <dev-code>
+      {
+        "elaiJS": {
+          "skipLanguageInitialization":     true|false - Default: false,
+          "skipLocalisationInitialization": true|false - Default: false
+        }
+      });
+      
+      require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
+        lang.initialize(function() {
+          console.log("Init done");
+        });
+        localisation.initialize(function() {
+          console.log("Init done");
+        });
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Définir la <i>Langue</i>/<i>Localisation</i></elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
+        function successCallback() {
+          console.log("All is load perfectly.");
+        }
+        
+        function errorCallback() {
+          console.log("An error occured.");
+        }
+        
+        lang.setLanguage("fr", successCallback, errorCallback);
+        lang.setLanguage("en", successCallback, errorCallback);
+        
+        localisation.setLocalisation("fr-FR", successCallback, errorCallback);
+        localisation.setLocalisation("en-US", successCallback, errorCallback);
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Récupérer une valeur</elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
+        // Ceci retourne la valeur associée à la clé key1 dans la langue actuelle.
+        lang.get("key1");
+        
+        // On peut aussi specifier une langue.
+        lang.get("key2", undefined, "fr");
+        
+        // La langue accepte également des paramètres optionels.
+        // Exemple: Si la 'key3' est définit par: The cost of {{object}} is ${{cost}}
+        var params =  {object: "nothing", cost: "42.42"};
+        lang.get("key3", params); // Output: The cost of nothing is $42.42.
+        
+        // Exemple2: Si la 'key4' est définit par: Info1: {{0}} and Info2: {{1}}
+        var params =  [42, "Great Info"];
+        lang.get("key4", params); // Output: Info1: 42 and Info2: Great Info
+        
+        
+        // La localisation fonctionne presque de la même façon que la langue ormis le système de paramètre qui est absent:
+        localisation.get("key1");
+        localisation.get("key2", "en-US");
+      });
+    </dev-code>
+    <elaijsapi-note>
+      Si la clé demandée n'est pas définis dans la <i>Langue</i>/<i>Localisation</i> actuelle, la même clé sera alors cherché dans la <i>Langue</i>/<i>Localisation</i> par défaut.
+    </elaijsapi-note>
+    
+    <elaijsapi-h4>Ecouter les changements</elaijsapi-h4>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
+      Chaque changement de langue ou de localisation génère un évènement qui peut être écouté.
+    </p>
+    <dev-code>
+      require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
+        lang.bind(lang.EVENT.languageChanged, function(event) {
+          console.log("Language changed for " + lang.getLanguage());
+        });
+        
+        lang.setLanguage("fr");
+        lang.setLanguage("en");
+        
+        
+        localisation.bind(localisation.EVENT.localisationChanged, function(event) {
+          console.log("Localisation changed for " + localisation.getLocalisation());
+        });
+        
+        localisation.setLocalisation("fr-FR");
+        localisation.setLocalisation("en-US");
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Comment c'est chargé</elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
+        
+      });
+    </dev-code>
+    
+    
+    
+    <elaijsapi-h4>Localisation findLoca</elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/localisation"], function(localisation) {
+        
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Localisation ajout de fonction</elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/localisation"], function(localisation) {
+        
+      });
+    </dev-code>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <elaijsapi-h4>Le cache</elaijsapi-h4>
     <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-    <p>
-The iron-flex-layout component provides simple ways to use CSS flexible box layout, also known as flexbox. This component provides two different ways to use flexbox:
-</p>
-<p>
-Layout classes. The layout class stylesheet provides a simple set of class-based flexbox rules. Layout classes let you specify layout properties directly in markup.
-</p>
-<p>
-Custom CSS mixins. The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the @apply function.
-</p>
-<p>
-Using the classes or CSS mixins is largely a matter of preference. The following sections discuss how to use the each of the stylesheets.
-</p>
-
+      Chaque service peut utiliser un cache. Cela signifie que si on appel deux fois le mêmes services avec des paramètres identiques, le service sera exécuté qu'une fois et lors du deuxième appel, le résultat du cache sera retourné.<br/>
+    </p>
+    <elaijsapi-note>
+      On peut changer cette configuration par service à n'importe quel moment.
+    </elaijsapi-note>
+    
+    <dev-code>
+      require(["elaiJS/webservice"], function(webservice) {
+        var count = 0;
+        // Creation du webservice qui utilise le cache
+        webservice.addService("simple", function(params, callback, errorCallback) {
+          ++count;
+          callback(42);
+        }, true);
+        
+        // On appel le webservice
+        var params;
+        webservice.simple(params, function(result) {
+          console.log("Count: %o", count); // Output: Count: 1
+        });
+        
+        // L'information est en cache, le service ne sera pas éxécuté à nouveau.
+        webservice.simple(params, function(result) {
+          console.log("Count: %o", count); // Output: Count: 1
+        });
+      });
+    </dev-code>
   </template>
   
   <script>
