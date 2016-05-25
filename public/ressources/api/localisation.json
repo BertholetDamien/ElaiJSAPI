@@ -1,0 +1,85 @@
+{
+  "name": "Localisation",
+  "methods": [
+    {
+      "name": "initialize",
+      "parameters": [
+        {
+          "name": "callback",
+          "type": "Function"
+        },
+        {
+          "name": "errCallback",
+          "type": "Function"
+        }
+      ]
+    },
+    {
+      "name": "getLocalisation",
+      "returns": "String"
+    },
+    {
+      "name": "setLocalisation",
+      "parameters": [
+        {
+          "name": "localisation",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function"
+        },
+        {
+          "name": "errCallback",
+          "type": "Function"
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "keyPropertie",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "localisation",
+          "type": "String",
+          "required": false,
+          "defaultValue": "getLocalisation()"
+        }
+      ]
+    },
+    {
+      "name": "findDefaultLocalisation",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "localisation",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "toLocaleString",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "date",
+          "type": "String || Date",
+          "required": true
+        },
+        {
+          "name": "localisation",
+          "type": "String",
+          "required": false,
+          "defaultValue": "getLocalisation()"
+        }
+      ]
+    }
+  ]
+}

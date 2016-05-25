@@ -13,11 +13,19 @@
       text-decoration: underline;
     }
     
+    
+    .wrapper {
+      display: none;
+    }
+    
   </style>
 
   <template>
     <div>
-      <elaijs-link href="[[href]]">{{get(lang, 'see_api')}}</elaijs-link>
+      <elaijs-link href="[[href]]">{{getContent(lang)}}</elaijs-link>
+      <div id="content" class="wrapper">
+        <content></content>
+      </div>
     </div>
   </template>
   
@@ -30,11 +38,18 @@
         ElaiJSBehaviors.Navigator
       ],
       properties: {
-        name: String
+        name: String,
+        customcontent: Boolean
       },
       ready: function() {
         var name = this.name || this.pageInfo.name;
         this.href = {page: "api", name: name};
+      },
+      getContent: function(lang) {
+        if(this.customcontent)
+          return this.$.content.innerHTML;
+          
+        return this.get(lang, 'see_api');
       }
     });
     });

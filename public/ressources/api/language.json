@@ -1,0 +1,62 @@
+{
+  "name": "Language",
+  "methods": [
+    {
+      "name": "initialize",
+      "parameters": [
+        {
+          "name": "callback",
+          "type": "Function"
+        },
+        {
+          "name": "errCallback",
+          "type": "Function"
+        }
+      ]
+    },
+    {
+      "name": "getLanguage",
+      "returns": "String"
+    },
+    {
+      "name": "setLanguage",
+      "parameters": [
+        {
+          "name": "language",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function"
+        },
+        {
+          "name": "errCallback",
+          "type": "Function"
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "keyPropertie",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "Object",
+          "required": false
+        },
+        {
+          "name": "language",
+          "type": "String",
+          "required": false,
+          "defaultValue": "getLanguage()"
+        }
+      ]
+    }
+  ]
+}
