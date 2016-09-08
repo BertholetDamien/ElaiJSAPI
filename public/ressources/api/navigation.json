@@ -1,0 +1,119 @@
+{
+  "name": "Navigation",
+  "methods": [
+    {
+      "name": "initialize"
+    },
+    {
+      "name": "getCurrentPageInfo",
+      "returns": "Object"
+    },
+    {
+      "name": "goTo",
+      "parameters": [
+        {
+          "name": "pageInfo",
+          "type": "Object",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "forward"
+    },
+    {
+      "name": "back"
+    },
+    {
+      "name": "getHistoryState",
+      "returns": "Object"
+    },
+    {
+      "name": "saveHistoryState",
+      "parameters": [
+        {
+          "name": "state",
+          "type": "Object"
+        }
+      ]
+    },
+    {
+      "name": "addToHistoryState",
+      "parameters": [
+        {
+          "name": "params",
+          "type": "Object",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "setBeforeUnloadMessage",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "required": true
+        },
+        {
+          "name": "showMessage",
+          "type": "Boolean",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "removeBeforeUnloadMessage"
+    },
+    {
+      "name": "addCookie",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "arg1",
+          "type": "var",
+          "required": true
+        },
+        {
+          "name": "arg2",
+          "type": "String",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "getCookie",
+      "returns": "String",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "removeCookie",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "getCookies",
+      "returns": "Object"
+    },
+    {
+      "name": "removeAllCookies"
+    }
+  ]
+}
