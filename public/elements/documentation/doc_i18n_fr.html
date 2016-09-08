@@ -133,6 +133,21 @@
       });
     </dev-code>
     
+    <elaijsapi-h4>Clé initiale et LocalStorage</elaijsapi-h4>
+    <p>
+      La clé par défaut est choisit dans la configuration mais la clé initiale de la langue et de la localisation est choisi autrement.<br/><br/>
+      A chaque changement de langue ou de localisation, si la configuration <i>languageStorageKey</i> ou <i>localisationStorageKey</i> est définit, cette valeur sera stocké avec cette clé dans le <i>localStorage</i> d'<b>ElaiJS</b>.<br/>
+      A l'initialisation du module, la clé initiale sera définit avec cette valeur si elle existe. Si non, ça sera l'<i>Auto Finding</i> vue plus haut qui sera utilisé. Si l'<i>Auto Finding</i> a été désactivé via la configuration, c'est la langue par défaut qui sera la clé initiale.
+    </p>
+    <dev-code>
+      require(["elaiJS/language", "elaiJS/config", "elaiJS/localStorage"], function(lang, config, localStorage) {
+        // Si on veut changer la langue de l'application sur tous les onglets à chaque fois qu'elle change sur l'un d'eux:
+        localStorage.bind(config.elaiJS.languageStorageKey, function(event) {
+          lang.setLanguage(event.data.newValue);
+        });
+      });
+    </dev-code>
+    
     <elaijsapi-h4>Comment c'est chargé</elaijsapi-h4>
     <p>
       Les informations nécessaires pour les deux modules sont chargées à partir de webservices (voir le module <b><i><elaijs-link page="documentation" name="webservice">Webservice</elaijs-link></i></b> pour plus d'informations).<br/>
