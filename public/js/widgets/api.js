@@ -1,4 +1,4 @@
-define(["elaiJS/webservice"], function(webservice) {
+define(["elaiJS/webservice", "elaiJS/helper"], function(webservice, helper) {
   'use strict';
   
 	return function() {
@@ -10,8 +10,7 @@ define(["elaiJS/webservice"], function(webservice) {
 	  };
 	  
 	  this.processRowData = function() {
-	    var data = this.rowData;
-	    
+	    var data = helper.clone(this.rowData);
 	    data.descriptionKey = data.name.toLowerCase();
 	    
 	    for(var i in data.methods)
