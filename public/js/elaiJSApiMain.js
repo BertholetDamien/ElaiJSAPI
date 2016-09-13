@@ -15,34 +15,40 @@ define(["elaiJS/widget", "elaiJSAPI/navigationManager",
 
 /*
   TODO:
-    Overview
-    RequireElaiJS
-    Configuration
-      DefaultConfiguration
-    Binder
-    Webservice
-      DefaultWebservice
-    Widget
-      primaryWidget
-    Plugin
-    Renderer
-      Mustacherend
-      Polymer
-    Navigation
-    Internationalisation
-      Language
-      Localisation
-    Ressources
-    Mode
-    Theme
-    Helper
-    DebugManager
-    
-    Storage ?
-    
-    Ecrire la page de Download
-    Ecrire la page d'acceuil
-    Ecrire la documentation
+    TO FIXED:
+      Arranger saut de lignes multiples dans api
+      Retour en haut de la scoll apres changements de pages !
+      Bloquer scroll on menu pour parent
+  
+    TO WRITE:
+      HomePage
+        
+      Documentation
+        Overview
+        RequireElaiJS
+        Configuration
+          DefaultConfiguration
+        Binder
+          Ajouter info
+        Webservice
+          DefaultWebservice
+        Widget
+          primaryWidget
+        Plugin
+        Renderer
+          Mustacherend
+          Polymer
+        Navigation
+        Mode
+        DebugManager
+      
+      API
+        Widget
+        Plugin
+        WidgetPrimaire
+        Mode
+      
+      Téléchargement
     
     Getting Started?
     

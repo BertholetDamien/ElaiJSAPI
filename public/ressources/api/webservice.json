@@ -41,6 +41,17 @@
       ]
     },
     {
+      "name": "removeCache",
+      "returns": "Object",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
       "name": "addBeforeListener",
       "returns": "Object",
       "parameters": [

@@ -28,7 +28,7 @@ define(["elaiJS/configuration", "elaiJS/navigator"],
       return false;
     }
     
-    navigator.initializeCurrentPage();
+    navigator.initialize();
   }
   
   return {initialize: initialize};
