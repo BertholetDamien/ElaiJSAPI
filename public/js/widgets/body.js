@@ -25,7 +25,7 @@ define([  "elaiJS/multicallback", "elaiJS/navigator"],
 		function pageChanged() {
 		  this.destroyChildByID("page");
 		  createPageWidget.call(this, function(widget) {
-		    widget.render();
+		    widget.render(undefined, scrollTop);
 		  });
 		}
 		
@@ -33,6 +33,10 @@ define([  "elaiJS/multicallback", "elaiJS/navigator"],
 		  var pageInfo = navigator.getCurrentPageInfo();
 		  var pageName = pageInfo.page;
 		  this.createChild(pageName, "page", pageInfo, callback);
+		}
+
+		function scrollTop() {
+			document.body.scrollTop = 0;
 		}
 	};
 });
