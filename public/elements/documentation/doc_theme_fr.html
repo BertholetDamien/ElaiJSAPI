@@ -10,27 +10,11 @@
     <elaijsapi-h4>Changer de thèmes</elaijsapi-h4>
     <dev-code>
       require(["elaiJS/theme"], function(themeManager) {
-        themeManager.setTheme("theme1");
-        console.log(themeManager.getTheme()); // Output: theme1
-        
-        themeManager.setTheme("theme2");
-        console.log(themeManager.getTheme()); // Output: theme2
-      });
-    </dev-code>
-    
-    <elaijsapi-h4>Callback et erreur</elaijsapi-h4>
-    <dev-code>
-      require(["elaiJS/theme"], function(themeManager) {
-        function themeLoaded(data) {
-          console.log("Tout s'est bien passé, le thème est chargé.");
-          console.log("Le theme a changé de " + data.oldTheme + " à " + data.newTheme);
-        }
-        
-        function errorCallback(error) {
-          console.log("Une erreur est survenue, le thème n'est pas chargé correctement.");
-        }
-        
-        themeManager.setTheme("theme1", themeLoaded, errorCallback);
+        themeManager.setTheme("theme1").then(function() {
+        	console.log(themeManager.getTheme()); // Output: theme1
+        }, function(response) {
+        	console.error("Error: %o", response); // Output: theme1
+        });
       });
     </dev-code>
     
@@ -56,19 +40,19 @@
       Par défaut, les webservices ajoutent ou enlevent une balise <i>link</i> dans la balise <i>HEAD</i> du <i>DOM</i>. L'url du fichier sera définit via la ressource <i>theme</i> (voir le module <elaijs-link page="documentation" name="ressources"><i><b>Ressource</b></i></elaijs-link> pour plus d'information).
     </p>
     <dev-code>
-      require(["elaiJS/webservice"], function(webservice) {
-        webservice.loadTheme(function(params, callback, errCallback) {
-          // Do your stuff here
-          callback();
-        });
-        
-        webservice.removeTheme(function(params, callback, errCallback) {
-          // Do your stuff here
-          callback();
-        });
-      });
-    </dev-code>
-    
+			require(["elaiJS/webservice", "elaiJS/ressources"], function(webservice, res) {
+				webservice.addService("loadTheme", function (params, resolve, reject) {
+					var url = res.get("theme", params);
+					return webservice.loadCSS(url, {useCache: false});
+				});
+				
+				webservice.addService("loadTheme", function (params, resolve, reject) {
+					var url = res.get("theme", params);
+					return webservice.removeDocument(url);
+				});
+			});
+		</dev-code>
+
     <elaijsapi-seeapi></elaijsapi-seeapi>
   </template>
   

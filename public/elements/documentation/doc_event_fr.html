@@ -8,7 +8,21 @@
     <dev-code>
       require(["elaiJS/binder"], function(binder) {
         var obj = {};
-        // On ajoute les fonctions d'évènements.
+        
+        // Cela ajoute les fonctions bind, bindOne, unbind, unbindAll et fire.
+        binder.addFunctions(obj);
+        
+        // Utile dans certains rares cas:
+        // Ajouter toutes les fonctions de binds à un object. Cela ajoute les fonctions de plus haut ainsi que tous les fonctions du scope Global (bindGlobal, bindOneGlobal, ...).
+        binder.addAllFunctions(obj);
+      });
+    </dev-code>
+    
+    <elaijsapi-h4>Ecouter les évènements d'un object</elaijsapi-h4>
+    <dev-code>
+      require(["elaiJS/binder"], function(binder) {
+        var obj = {};
+        // On rend l'object evenementiable.
         binder.addFunctions(obj);
         
         // On bind l'évènement à une fonction.
@@ -17,8 +31,27 @@
         });
         
         // Et on lance l'évènement !
-        var params;
-        obj.fire("superEventCustom", params);
+        obj.fire("superEventCustom");
+        
+        
+        // On bind l'évènement à une fonction et on s'attend a des parametres.
+        obj.bind("superEventCustomParams", function(event) {
+          console.log(event.data.sun); // 42
+        });
+        
+        // Et on lance l'évènement avec parametres !
+        obj.fire("superEventCustomParams", {sun: 42});
+        
+        
+        
+        
+        // On bind l'évènement à une fonction et on s'attend a des parametres.
+        obj.bind("superEventCustomParams", function(event) {
+          console.log(event.data.sun); // 42
+        });
+        
+        // Et on lance l'évènement avec parametres !
+        obj.fire("superEventCustomParams", {sun: 42});
       });
     </dev-code>
     

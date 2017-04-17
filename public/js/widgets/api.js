@@ -5,21 +5,21 @@ define(["elaiJS/webservice", "elaiJS/helper"], function(webservice, helper) {
 	  
 	  this._initialize = this.refreshData;
 	  
-	  this._fetchData = function(callback) {
-      webservice.loadAPI(this.params.name, callback);
+	  this._fetchData = function _fetchData() {
+      return webservice.loadAPI(this.params.name);
 	  };
 	  
-	  this.processRowData = function() {
-	    var data = helper.clone(this.rowData);
+	  this._processRawData = function _processRawData() {
+	    var data = helper.clone(this.rawData);
 	    data.descriptionKey = data.name.toLowerCase();
 	    
 	    for(var i in data.methods)
-	      processRowMethod(data.methods[i], data.descriptionKey);
+	      processRawMethod(data.methods[i], data.descriptionKey);
 	    
 	    return data;
 	  };
 	  
-	  function processRowMethod(method, baseKey) {
+	  function processRawMethod(method, baseKey) {
       var methodKey = baseKey + "_" + method.name;
       method.descriptionKey = methodKey;
       
@@ -34,7 +34,7 @@ define(["elaiJS/webservice", "elaiJS/helper"], function(webservice, helper) {
       }
 	  }
 	  
-	  this.afterSetData = function() {
+	  this.afterSetData = function afterSetData() {
 	    this.viewData = this.data;
 	  };
 	};

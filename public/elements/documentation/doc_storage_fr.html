@@ -20,7 +20,7 @@
     
     <elaijsapi-h4>Ajouter un item</elaijsapi-h4>
     <p>
-      A l'ajout d'un item, la valeur de l'item est <i>stringifié</i>. Au moment de récupérer sa valeur, elle est parsé.<br/>
+      Avec <b>ElaiJS</b>, quand on ajoute un item, sa valeur est <i>stringifié</i>. Au moment de récupérer sa valeur, elle est parsé.<br/>
       Cela permet de stocker des objects, des strings, des booleans ou des entiers de façon complètement transparente.
     </p>
      <dev-code>
@@ -37,8 +37,8 @@
     
     <elaijsapi-h4>Utiliser plusieurs <i>chemin</i></elaijsapi-h4>
     <p>
-      <b>ElaiJS</b> permet de gérer plusieurs stockages sur un même nom de domaine. Chaque action sur le <i>localStorage</i> d'<b>ElaiJS</b> peut être appelé avec un <i>chemin</i>. Le <i>chemin</i> permet de déterminer dans quel stockage on veut chercher.<br/><br/>
-      Si aucun <i>chemin</i> n'est définit, c'est la configuration "config.elaiJS.storagePath" qui sera utilisé. Cette configuration a par défaut la valeur de "location.pathname". Ex. Dans le cas de <i>monsite.com/chemin</i>, la valeur par défaut sera <i>chemin</i>.
+      <b>ElaiJS</b> permet de gérer plusieurs stockages sur un même nom de domaine. Chaque action sur le <i>localStorage</i> d'<b>ElaiJS</b> peut être appelé avec un <i>chemin</i>. Le <i>chemin</i> permet de déterminer dans quel stockage on travaille.<br/><br/>
+      Si aucun <i>chemin</i> n'est définit, c'est la configuration "config.elaiJS.storagePath" qui sera utilisé. Cette configuration a par défaut la valeur de "location.pathname". Ex. Dans le cas de <i>monsite.com/chemin</i>, la valeur par défaut sera <i>chemin</i>.<br/><br/>
     </p>
      <dev-code>
       require(["elaiJS/localStorage"], function(localStorageElaiJS) {
@@ -53,6 +53,9 @@
     </dev-code>
     <elaijsapi-note>
       Ceci ne multiplie pas l'espace alloué par le navigateur sur le nom de domaine. Il est partagé entre les différents <i>chemin</i>.
+    </elaijsapi-note>
+    <elaijsapi-note>
+      Si on ne veut pas utiliser les chemins, il suffit de définir la configuration "config.elaiJS.storagePath" à une valeur fixe.
     </elaijsapi-note>
     
     <elaijsapi-h4>Suppressions des items</elaijsapi-h4>
@@ -114,29 +117,29 @@
       </li>
     </ul>
     <dev-code>
-      require(["elaiJS/localStorage"], function(localStorageElaiJS) {
-        // Comme pour chaque fonction, si aucun scope n'est specifie, le scope par defaut sera utilise.
-        var scope;
-        
-        // On ecoute les changements de l'onglet courant.
-        localStorageElaiJS.bindCurrentTab("test1", function(event) {
-        console.log("L'item a ete change a partir de cet onglet.");
-          console.log("%o", event.data.key);
-          console.log("%o", event.data.newValue);
-          console.log("%o", event.data.oldValue);
-          console.log("%o", event.data.path); // Le scope
-        }, scope);
-        
-        // On ecoute les changements des autres onglets.
-        localStorageElaiJS.bind("test1", function() {
-          console.log("L'item a ete change a partir d'un autre onglet.");
-        }, scope);
-        
-        localStorageElaiJS.set("test1", "elaiJS", scope);
-      });
+			require(["elaiJS/localStorage"], function(localStorageElaiJS) {
+				// On peut specifier un chemin.
+				var scope;
+				
+				// On ecoute les changements de l'onglet courant.
+				localStorageElaiJS.bindCurrentTab("test1", function(event) {
+					console.log("L'item a ete change a partir de cet onglet.");
+					console.log("%o", event.data.key);
+					console.log("%o", event.data.newValue);
+					console.log("%o", event.data.oldValue);
+					console.log("%o", event.data.path); // Le scope
+				}, scope);
+				
+				// On ecoute les changements des autres onglets.
+				localStorageElaiJS.bind("test1", function(event) {
+					console.log("L'item a ete change a partir d'un autre onglet. %o", event.data);
+				}, scope);
+				
+				localStorageElaiJS.set("test1", "elaiJS", scope);
+			});
     </dev-code>
     <elaijsapi-note>
-      Internet Explorer 10, 11 et Edge supportement mal la fonctionnalité d'écoute des autres onglets.
+      Internet Explorer 10, 11 et Edge supportement mal cette fonctionnalité.
     </elaijsapi-note>
     
     <elaijsapi-seeapi></elaijsapi-seeapi>

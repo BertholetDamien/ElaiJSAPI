@@ -95,10 +95,24 @@
   </template>
   
   <script>
-    ElaiJSBehaviors.wait(function() {
-    Polymer({
-      is: 'doc-ressources-fr'
-    });
-    });
+		ElaiJSBehaviors.wait(function() {
+		Polymer({
+			is: 'doc-ressources-fr',
+			ready: function() {
+				this.path1 = "{{path1}}";
+				this.path2 = "{{path2}}";
+				this.name = "{{name}}";
+				this.paths = "{{paths}}";
+				this.ext = "{{ext}}";
+				this.abc = "{{abc}}";
+				this.def = "{{def}}";
+				this.custom1 = "{{custom1}}";
+				this.custom2 = "{{custom2}}";
+				this.custom3 = "{{custom3}}";
+				this.neg = "{{neg}}";
+				this.pos = "{{pos}}";
+			}
+		});
+		});
   </script>
 </dom-module>

@@ -6,9 +6,9 @@ define([  "elaiJS/webservice", "elaiJS/ressources"],
     webservice.addService("loadAPI", loadAPI, {useCache: true});
 	}
 	
-	function loadAPI(name, callback, errCallback) {
+	function loadAPI(name) {
     var url = res.get("api", {name: name});
-    webservice.loadJSONFile(url, callback, errCallback);
+    return webservice.loadJSONFile(url);
 	}
 	
 	return {initialize: initialize};

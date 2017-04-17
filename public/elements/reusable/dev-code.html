@@ -80,6 +80,7 @@
       function initCodeMirror(CodeMirror) {
         var value = this.$.container.innerHTML.trim();
         value = value.replace(/\n      /gi, "\n");
+        value = value.replace(/\n\t\t\t/gi, "\n");
         
         this.mirror = CodeMirror(this.$.wrapper, {
           value: value,

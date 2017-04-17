@@ -29,7 +29,7 @@
       }
     </dev-code>
     <p>
-      2. L'<i>Auto Finding</i> va utiliser la langue du <i>navigateur</i> afin de déterminer la langue initiale. Cette information se trouve grâce aux variables d'environnement suivantes: <i>window.navigator.userLanguage</i> || <i>window.navigator.language</i>
+      2. L'<i>Auto Finding</i> va utiliser la langue du <i>navigateur</i> afin de déterminer la langue initiale. Cette information se trouve grâce aux variables d'environnement suivantes: <i>window.navigator.userLanguage</i> et <i>window.navigator.language</i>
     </p>
     <dev-code>
       {
@@ -54,10 +54,10 @@
       }
       
       require(["elaiJS/language", "elaiJS/localisation"], function(lang, localisation) {
-        lang.initialize(function() {
+        lang.initialize().then(function() {
           console.log("Init done");
         });
-        localisation.initialize(function() {
+        localisation.initialize().then(function() {
           console.log("Init done");
         });
       });
@@ -74,11 +74,11 @@
           console.log("An error occuredM %o", e);
         }
         
-        lang.setLanguage("fr", successCallback, errorCallback);
-        lang.setLanguage("en", successCallback, errorCallback);
+        lang.setLanguage("fr").then(successCallback, errorCallback);
+        lang.setLanguage("en").then(successCallback, errorCallback);
         
-        localisation.setLocalisation("fr-FR", successCallback, errorCallback);
-        localisation.setLocalisation("en-US", successCallback, errorCallback);
+        localisation.setLocalisation("fr-FR").then(successCallback, errorCallback);
+        localisation.setLocalisation("en-US").then(successCallback, errorCallback);
       });
     </dev-code>
     
@@ -107,7 +107,7 @@
       });
     </dev-code>
     <elaijsapi-note>
-      Si la clé demandée n'est pas définis dans la <i>Langue</i>/<i>Localisation</i> actuelle, la même clé sera alors cherché dans la <i>Langue</i>/<i>Localisation</i> par défaut.
+      Si la clé demandée n'est pas définis dans la <i>Langue</i>/<i>Localisation</i> actuelle, c'est la valeur dans la <i>Langue</i>/<i>Localisation</i> par défaut qui sera retournée.
     </elaijsapi-note>
     
     <elaijsapi-h4>Ecouter les changements</elaijsapi-h4>
@@ -136,7 +136,7 @@
     <elaijsapi-h4>Clé initiale et LocalStorage</elaijsapi-h4>
     <p>
       La clé par défaut est choisit dans la configuration mais la clé initiale de la langue et de la localisation est choisi autrement.<br/><br/>
-      A chaque changement de langue ou de localisation, si la configuration <i>languageStorageKey</i> ou <i>localisationStorageKey</i> est définit, cette valeur sera stocké avec cette clé dans le <i>localStorage</i> d'<b>ElaiJS</b>.<br/>
+      A chaque changement de langue ou de localisation, si la configuration <i>languageStorageKey</i> ou <i>localisationStorageKey</i> est définit, cette valeur sera stocké avec cette clé dans le <b><i><elaijs-link page="documentation" name="storage">LocalStorage</elaijs-link></i></b> d'<b>ElaiJS</b>.<br/>
       A l'initialisation du module, la clé initiale sera définit avec cette valeur si elle existe. Si non, ça sera l'<i>Auto Finding</i> vue plus haut qui sera utilisé. Si l'<i>Auto Finding</i> a été désactivé via la configuration, c'est la langue par défaut qui sera la clé initiale.
     </p>
     <dev-code>
@@ -148,7 +148,7 @@
       });
     </dev-code>
     
-    <elaijsapi-h4>Comment c'est chargé</elaijsapi-h4>
+    <elaijsapi-h4>Chargement des fichiers</elaijsapi-h4>
     <p>
       Les informations nécessaires pour les deux modules sont chargées à partir de webservices (voir le module <b><i><elaijs-link page="documentation" name="webservice">Webservice</elaijs-link></i></b> pour plus d'informations).<br/>
       Les deux webservices doivent retourner un object qui contient les "clés/valeurs" des informations nécessaires.<br/><br/>
@@ -157,51 +157,48 @@
       Si on aimerait, par exemple, charger le fichier de langue à partir d'un endpoint Rest qui l'enverrait en <i>json</i> directement, il est très facile de faire le changement. Voici un exemple:
     </p>
     <dev-code>
-      require(["elaiJS/language", "elaiJS/webservice", "elaiJS/ressources"], function(lang, webservice, res) {
-      
-        webservice.addService("loadLanguageFile", loadLanguage, {useCache: true});
-        
-        function loadLanguage(code, callback) {
-          // Cela permet de configurer l'url du endpoint facilement
-          // Voir le Module ressources pour plus de détail.
-          var url = res.get("language", {name: code});
-          
-          // On appel le endpoint Rest à cette url.
-          webservice.ajax(url, function(req) {
-            callback(req.responseText);
-          });
-        }
-      });
+			require(["elaiJS/language", "elaiJS/webservice", "elaiJS/ressources"], function(lang, webservice, res) {
+				webservice.addService("loadLanguage", loadLanguage);
+				
+				function loadLanguage(params, resolve, reject) {
+					// Cela permet de configurer l'url du endpoint facilement
+					// Voir le Module ressources pour plus de détail.
+					var url = res.get("language", {name: params});
+					
+					// On appel le endpoint Rest à cette url.
+					return webservice.ajax(url).then(function(req) {
+						return req.responseText;
+					});
+				}
+			});
     </dev-code>
     <elaijsapi-note>
-      Si on change le webservice d'un des deux modules, il faut mettre le tag <i>skip*Initialization</i> du module associé à <i>false</i>, changer les webservices et ensuite initialiser le module. Cela assure que les données soient chargées correctement à l'initialisation.
+      Si on change le webservice d'un des deux modules, il faut mettre le tag <i>skipInitialization</i> du module associé à <i>false</i>, changer les webservices et ensuite initialiser le module. Cela assure que les données soient chargées correctement à l'initialisation.
     </elaijsapi-note>
     
     
     <elaijsapi-h4>Localisation et valeur par défaut</elaijsapi-h4>
     <p>
-      Etant donné que le module de <i>localisation</i> prend en clé la langue + le code du pays, tel que en-US ou fr-FR, on peut définir des valeurs par défaut pour simplifier l'utilisation.<br/>
-      Par exemple, Si l'on définit la localisation 'en', elle sera considérée comme étant 'en-US'. Cette configuration est définit par: <i>matchValidLocalisation</i>.
+      Afin de simplifier les configurations, au lieu de spécifier la clé de la langue + le code du pays, tel que en-US ou fr-FR, on peut définir des valeurs par défaut.<br/>
+      Par exemple, on peut déterminer que les localisation en-US et en-CA sont en faites la même localisation. Cette configuration est définit par: <i>matchValidLocalisation</i>.
     </p>
     <dev-code>
-      require(["elaiJS/localisation", "elaiJS/config"], function(localisation, config) {
-        // A chaque fois qu'on utilise la clé 'myKey', on utilisera en fait la clé 'myDefault'
-        config.elaiJS.matchValidLocalisation.myKey = "myDefault";
-      
-        // Ceci fonctionnera seulement si la localisation 'myDefault' existe.
-        localisation.setLocalisation("myKey");
-        console.log(localisation.getLocalisation()); // Output: myDefault
-        
-        // On peut également utiliser la fonction qui "convertit" notre localisation.
-        console.log(localisation.findDefaultLocalisation("myKey")); // Output: myDefault
-        console.log(localisation.findDefaultLocalisation("other")); // Output: other
-      });
+			require(["elaiJS/localisation", "elaiJS/config"], function(localisation, config) {
+				// A chaque fois qu'on utilise la clé 'myKey', on utilisera en fait la clé 'myCountry'
+				config.elaiJS.matchValidLocalisation.myKey = "myCountry";
+				
+				// Ceci fonctionnera seulement si la localisation 'myDefault' existe.
+				localisation.setLocalisation("myKey").then(function() {
+					console.log(localisation.getLocalisation()); // Output: myCountry
+					
+					// On peut aussi savoir quel sont les defaults values.
+					console.log(localisation.findDefaultLocalisation("myKey")); // Output: myCountry
+					console.log(localisation.findDefaultLocalisation("other")); // Output: other
+				});
+			});
     </dev-code>
-    <elaijsapi-note>
-      Ce mécanisme de convertion sera utilisée lors de tous les appels des fonctions du module de <i>localisation</i>.
-    </elaijsapi-note>
     
-    <elaijsapi-h4>Localisation ajout de fonction</elaijsapi-h4>
+    <elaijsapi-h4>Localisation et ajout de fonctions</elaijsapi-h4>
     <p>
       Dans le module de <i>langue</i>, le simple fait de pouvoir avoir des phrases internationalisés paramétrables est suffisant. Dans le cas de la <i>localisation</i>, des actions plus avancées comme formatter la date ou des valeurs monétaires sont nécessaires.<br/>
       Pour se faire, il suffit de rajouter ces fonctions sur le module de <i>localisation</i> directement. Une fonction de base est déjà définit: <i>toLocaleString</i>, elle permet de formatter la date.
@@ -219,22 +216,17 @@
         
         localisation.toLocaleString("test"); // Output: custom format: test
         
-        // De la même façon, on peut ajouter une nouvelle fonction avec les paramètres souhaitées:
+        // De la même façon, on peut ajouter une nouvelle fonction:
         localisation.formatCurrency = function(value, superParams, loc) {
           // On récupère la configuration de la localisation demandée.
           var currencyFormat = localisation.get("currencyFormat", loc);
           
           var formattedValue;
-          
-          // * Do magic with the format*
-          
+          /* Do magic */
           return formattedValue;
         };
       });
     </dev-code>
-    <elaijsapi-note>
-      Bien évidemment, si vous ajoutez une fonction qui a pour nom une des fonctions de bases du module (get, setLocalisation, findDefaultLocalisation, getLocalisation, initialize), ces fonctions ne seront plus utilisables.
-    </elaijsapi-note>
     
     <br/>
     <elaijsapi-seeapi name="language" customcontent=true>
